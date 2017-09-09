@@ -16,5 +16,4 @@ function getCfg(){
     }
     return $configProp;
 }
-
 \Bravo\Lib\Config::init(getCfg());

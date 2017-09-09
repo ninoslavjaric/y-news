@@ -17,7 +17,9 @@ class EventListener
     private static $events = [];
 
     public function trigger(string $event, $object = null){
-        call_user_func(self::$events[$event], $object);
+        $params = func_get_args();
+        array_shift($params);
+        call_user_func_array(self::$events[$event], $params);
     }
     public function addEvent(string $key, \Closure $callback){
         self::$events[$key] = $callback;
