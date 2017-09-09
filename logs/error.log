@@ -1,0 +1,177 @@
+2017/09/06 23:29:48 [error] 4425#4425: *177 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=15045 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/08 22:44:56 [error] 1070#1070: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Dao\Djes' not found in /var/www/bravo.yf/www/index.php:11
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 11" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/08 22:53:51 [error] 1073#1073: *23 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=19817 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/08 22:55:14 [error] 1073#1073: *25 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Lib\Djes' not found in /var/www/bravo.yf/www/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 14" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=15323 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/08 22:55:39 [error] 1073#1073: *33 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Lib\Djes' not found in /var/www/bravo.yf/www/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 14" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=14094 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/08 22:56:01 [error] 1073#1073: *35 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Lib\Djes' not found in /var/www/bravo.yf/www/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 14" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=18247 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/08 22:56:46 [error] 1073#1073: *37 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Lib\Djes' not found in /var/www/bravo.yf/www/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 14" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=13434 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/09 02:02:04 [error] 1073#1073: *39 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Lib\Djes' not found in /var/www/bravo.yf/www/index.php:11
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 11" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com", referrer: "http://bravo-test.com/test.html"
+2017/09/09 02:03:23 [error] 1073#1073: *43 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Lib\Djes' not found in /var/www/bravo.yf/www/index.php:11
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 11" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com", referrer: "http://bravo-test.com/test.html"
+2017/09/09 02:04:15 [error] 1073#1073: *43 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Lib\Djes' not found in /var/www/bravo.yf/www/index.php:11
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 11" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com", referrer: "http://bravo-test.com/test.html"
+2017/09/09 02:31:11 [error] 1073#1073: *48 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Lib\Djes' not found in /var/www/bravo.yf/www/index.php:11
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 11" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com", referrer: "http://bravo-test.com/test.html"
+2017/09/09 02:31:23 [error] 1073#1073: *48 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Bravo\Lib\Djes' not found in /var/www/bravo.yf/www/index.php:11
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 11" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com", referrer: "http://bravo-test.com/test.html"
+2017/09/09 11:44:11 [error] 1198#1198: *1 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=12837 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 11:45:28 [error] 1200#1200: *3 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=15087 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 11:48:29 [error] 1200#1200: *13 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=15844 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 11:49:45 [error] 1200#1200: *15 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=18967 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 11:51:19 [error] 1200#1200: *17 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=11465 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 12:00:03 [error] 1200#1200: *24 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Exception: Test in /var/www/bravo.yf/www/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 12" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/09 12:01:01 [error] 1200#1200: *28 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Exception: Test in /var/www/bravo.yf/www/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 12" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=14457 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/09 12:08:14 [error] 1200#1200: *34 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=11312 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 12:08:45 [error] 1200#1200: *38 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Exception: Test in /var/www/bravo.yf/www/index.php:36
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 36" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/09 12:09:17 [error] 1200#1200: *38 FastCGI sent in stderr: "PHP message: PHP Warning:  Division by zero in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/bravo.yf/www/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/09 12:09:17 [error] 1200#1200: *38 FastCGI sent in stderr: "PHP message: PHP Warning:  Division by zero in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/bravo.yf/www/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com", referrer: "http://bravo-test.com/"
+2017/09/09 12:09:36 [error] 1200#1200: *38 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Class 'Djes' not found in /var/www/bravo.yf/www/index.php:37
+Stack trace:
+#0 {main}
+  thrown in /var/www/bravo.yf/www/index.php on line 37" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/09 12:35:15 [error] 1200#1200: *44 FastCGI sent in stderr: "PHP message: PHP Warning:  Missing argument 2 for {closure}() in /var/www/bravo.yf/www/index.php on line 36
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Warning:  Missing argument 3 for {closure}() in /var/www/bravo.yf/www/index.php on line 36
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Warning:  Missing argument 4 for {closure}() in /var/www/bravo.yf/www/index.php on line 36
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Warning:  Missing argument 5 for {closure}() in /var/www/bravo.yf/www/index.php on line 36
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Notice:  Undefined variable: b in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Notice:  Undefined variable: c in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Notice:  Undefined variable: d in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Notice:  Undefined variable: e in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, 
+2017/09/09 12:35:15 [error] 1200#1200: *44 FastCGI sent in stderr: "PHP message: PHP Warning:  Missing argument 2 for {closure}() in /var/www/bravo.yf/www/index.php on line 36
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Warning:  Missing argument 3 for {closure}() in /var/www/bravo.yf/www/index.php on line 36
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Warning:  Missing argument 4 for {closure}() in /var/www/bravo.yf/www/index.php on line 36
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Warning:  Missing argument 5 for {closure}() in /var/www/bravo.yf/www/index.php on line 36
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Notice:  Undefined variable: b in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Notice:  Undefined variable: c in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Notice:  Undefined variable: d in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP Notice:  Undefined variable: e in /var/www/bravo.yf/www/index.php on line 37
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {closure:/var/www/bravo.yf/www/index.php:36-38}() /var/www/bravo.yf/www/index.php:0" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, 
+2017/09/09 15:09:54 [error] 1200#1200: *85 FastCGI sent in stderr: "PHP message: PHP Warning:  scandir(/var/www/bravo.yf/loaders/..config): failed to open dir: No such file or directory in /var/www/bravo.yf/loaders/configloader.php on line 8
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP   2. require_once() /var/www/bravo.yf/www/index.php:10
+PHP message: PHP   3. include_once() /var/www/bravo.yf/loaders/gatherer.php:12
+PHP message: PHP   4. scandir(*uninitialized*) /var/www/bravo.yf/loaders/configloader.php:8
+PHP message: PHP Warning:  scandir(): (errno 2): No such file or directory in /var/www/bravo.yf/loaders/configloader.php on line 8
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/bravo.yf/www/index.php:0
+PHP message: PHP   2. require_once() /var/www/bravo.yf/www/index.php:10
+PHP message: PHP   3. include_once() /var/www/bravo.yf/loaders/gatherer.php:12
+PHP message: PHP   4. scandir(*uninitialized*) /var/www/bravo.yf/loaders/configloader.php:8" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=17547 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/09 15:11:30 [error] 1200#1200: *89 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=14115 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 18:38:41 [error] 1200#1200: *93 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=14802 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 18:42:49 [error] 1200#1200: *99 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=14402 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 18:44:27 [error] 1200#1200: *101 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=16524 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 18:50:17 [error] 1200#1200: *105 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=12355 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 20:49:05 [error] 1200#1200: *107 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=12011 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 20:50:18 [error] 1200#1200: *109 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=10480 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 20:54:38 [error] 1200#1200: *113 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=14234 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 21:17:57 [error] 1200#1200: *115 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=14934 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 21:24:16 [error] 1200#1200: *127 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=15073 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 21:25:18 [error] 1200#1200: *129 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=10915 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 23:15:11 [error] 1200#1200: *135 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=15729 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 23:16:45 [error] 1200#1200: *137 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=14119 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/09 23:55:47 [error] 1200#1200: *143 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=16902 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock", host: "bravo-test.com"
+2017/09/10 00:09:55 [error] 1200#1200: *149 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Bravo\Lib\Event\EventListener::trigger() must be an instance of Bravo\Lib\Event\object, instance of stdClass given, called in /var/www/bravo.yf/src/Lib/Arbeiter.php on line 27 and defined in /var/www/bravo.yf/src/Lib/Event/EventListener.php:19
+Stack trace:
+#0 /var/www/bravo.yf/src/Lib/Arbeiter.php(27): Bravo\Lib\Event\EventListener->trigger('djes', Object(stdClass))
+#1 /var/www/bravo.yf/www/index.php(12): Bravo\Lib\Arbeiter::init()
+#2 {main}
+  thrown in /var/www/bravo.yf/src/Lib/Event/EventListener.php on line 19" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=16803 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/10 00:10:11 [error] 1200#1200: *151 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Bravo\Lib\Event\EventListener::trigger() must be an instance of Bravo\Lib\Event\object, instance of stdClass given, called in /var/www/bravo.yf/src/Lib/Arbeiter.php on line 27 and defined in /var/www/bravo.yf/src/Lib/Event/EventListener.php:19
+Stack trace:
+#0 /var/www/bravo.yf/src/Lib/Arbeiter.php(27): Bravo\Lib\Event\EventListener->trigger('djes', Object(stdClass))
+#1 /var/www/bravo.yf/www/index.php(12): Bravo\Lib\Arbeiter::init()
+#2 {main}
+  thrown in /var/www/bravo.yf/src/Lib/Event/EventListener.php on line 19" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=10527 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/10 00:10:34 [error] 1200#1200: *153 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Bravo\Lib\Event\EventListener::trigger() must be an instance of Bravo\Lib\Event\object, instance of stdClass given, called in /var/www/bravo.yf/src/Lib/Arbeiter.php on line 27 and defined in /var/www/bravo.yf/src/Lib/Event/EventListener.php:19
+Stack trace:
+#0 /var/www/bravo.yf/src/Lib/Arbeiter.php(27): Bravo\Lib\Event\EventListener->trigger('djes', Object(stdClass))
+#1 /var/www/bravo.yf/www/index.php(12): Bravo\Lib\Arbeiter::init()
+#2 {main}
+  thrown in /var/www/bravo.yf/src/Lib/Event/EventListener.php on line 19" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=13550 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/10 00:12:17 [error] 1200#1200: *157 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Bravo\Lib\Arbeiter::Bravo\Lib\{closure}() must be an instance of Exception, instance of TypeError given in /var/www/bravo.yf/src/Lib/Arbeiter.php:26
+Stack trace:
+#0 [internal function]: Bravo\Lib\Arbeiter::Bravo\Lib\{closure}(Object(TypeError))
+#1 {main}
+  thrown in /var/www/bravo.yf/src/Lib/Arbeiter.php on line 26" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=13352 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/10 00:12:42 [error] 1200#1200: *159 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Bravo\Lib\Arbeiter::Bravo\Lib\{closure}() must be an instance of Exception, instance of TypeError given in /var/www/bravo.yf/src/Lib/Arbeiter.php:25
+Stack trace:
+#0 [internal function]: Bravo\Lib\Arbeiter::Bravo\Lib\{closure}(Object(TypeError))
+#1 {main}
+  thrown in /var/www/bravo.yf/src/Lib/Arbeiter.php on line 25" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=12129 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
+2017/09/10 00:13:09 [error] 1200#1200: *161 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Bravo\Lib\Arbeiter::Bravo\Lib\{closure}() must be an instance of Exception, instance of TypeError given in /var/www/bravo.yf/src/Lib/Arbeiter.php:25
+Stack trace:
+#0 [internal function]: Bravo\Lib\Arbeiter::Bravo\Lib\{closure}(Object(TypeError))
+#1 {main}
+  thrown in /var/www/bravo.yf/src/Lib/Arbeiter.php on line 25" while reading response header from upstream, client: 127.0.0.1, server: bravo.yf, request: "GET /?XDEBUG_SESSION_START=17930 HTTP/1.1", upstream: "fastcgi://unix:/run/php/nino-fpm.sock:", host: "bravo-test.com"
