@@ -1,8 +1,0 @@
-{
-  "autoload"  : {
-    "psr-4" : {
-      "Bravo\\Lib\\" : "src/Lib",
-      "Bravo\\Logic\\" : "src/Logic"
-    }
-  }
-}
