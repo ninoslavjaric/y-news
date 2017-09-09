@@ -43,8 +43,12 @@ class Arbeiter
     }
 
     private static function initRequest(){
-        $h = \getallheaders();
-        $request = new Request($_REQUEST, getallheaders());
+        $request = (new Request)
+            ->setParams($_REQUEST)
+            ->setHeaders(getallheaders())
+            ->setMethod($_SERVER['REQUEST_METHOD'])
+        ;
+
         static::$request = $request;
         unset($_REQUEST);
     }

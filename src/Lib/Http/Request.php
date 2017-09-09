@@ -35,10 +35,12 @@ class Request
 
     /**
      * @param array $params
+     * @return $this
      */
     public function setParams(array $params)
     {
         $this->params = $params;
+        return $this;
     }
 
     /**
@@ -51,10 +53,12 @@ class Request
 
     /**
      * @param array $headers
+     * @return $this
      */
     public function setHeaders(array $headers)
     {
         $this->headers = $headers;
+        return $this;
     }
 
     /**
@@ -67,10 +71,21 @@ class Request
 
     /**
      * @param string $method
+     * @return $this
      */
     public function setMethod(string $method)
     {
         $this->method = $method;
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getParam(string $key): string
+    {
+        return $this->params[$key];
     }
 
 }
