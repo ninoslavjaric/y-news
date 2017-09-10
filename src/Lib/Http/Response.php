@@ -31,7 +31,7 @@ class Response
      * @param array $content
      * @param string $view
      */
-    public function __construct(array $content, string $view)
+    public function __construct(array $content, string $view = "index/index")
     {
         $this->content = $content;
         $this->view = $view;

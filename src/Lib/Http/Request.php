@@ -127,12 +127,17 @@ class Request
         $fragments = explode("/", $path);
         array_shift($fragments);
         foreach ($fragments as $key => $fragment) {
+            if($key < 2 && !($fragment = trim($fragment)))
+                continue;
             switch ($key){
                 case 0:
-                    $directive['controller'] = "Bravo\\Controller\\".ucfirst($fragment)."Controller";
+                    if(trim($fragment)){
+                        $directive['controller'] = "Bravo\\Controller\\".ucfirst($fragment)."Controller";
+                    }
                     break;
                 case 1:
-                    $directive['method'] = strtolower($this->getMethod()).ucfirst($fragment);
+                    if(trim($fragment))
+                        $directive['method'] = strtolower($this->getMethod()).ucfirst($fragment);
                     break;
                 default:
                     $directive['arguments'][] = $fragment;

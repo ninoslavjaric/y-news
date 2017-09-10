@@ -10,6 +10,8 @@ namespace Bravo\Lib;
 
 
 use Bravo\Controller\IndexController;
+use Bravo\Lib\Controller\Container;
+use Bravo\Lib\Controller\ErrorController;
 use Bravo\Lib\Event\EventContainer;
 use Bravo\Lib\Http\Request;
 use Exception;
@@ -28,16 +30,32 @@ class Arbeiter
     /**
      * @var Controller
      */
-    private static $controller;
+    public static $controller;
 
     public static function init(){
-        set_exception_handler(function ($e){
-            die;
+        ini_set("display_errors", "on");
+
+        set_error_handler(function($a, $b, $c, $d, $e){
+            var_dump([$a, $b, $c, $d, $e]);
         });
+
+        self::initExceptionHandler();
         static::initEventContainer();
         static::initRequest();
         static::initController();
         static::printResponse();
+    }
+
+    private static function initExceptionHandler(){
+        set_exception_handler(function ($e){
+            $container = new Container(new ErrorController, "getIndex", [$e]);
+            Arbeiter::$controller = $container
+                ->getController()
+                ->setRequest(Arbeiter::$request)
+                ->setResponse($container->getResponse())
+            ;
+            Arbeiter::printResponse();
+        });
     }
 
     private static function initEventContainer(){
@@ -65,33 +83,16 @@ class Arbeiter
     {
         $container = self::$request->getControllerContainer();
         $container->validate();
-        self::$controller = $container
-            ->getController()
-            ->setRequest(self::$request)
-            ->setResponse($container->getResponse())
-        ;
+        if(!self::$controller)
+            self::$controller = $container
+                ->getController()
+                ->setRequest(self::$request)
+                ->setResponse($container->getResponse())
+            ;
     }
 
     private static function printResponse()
     {
         echo static::$controller->getResponse();
     }
-
-
-//    private static function setHandlers(){
-//        set_error_handler(function($a, $b, $c, $d, $e){
-//            var_dump([$a, $b, $c, $d, $e]);
-//        });
-//        trigger_error("Cannot divide by zero", E_USER_ERROR);
-//        set_exception_handler(self::exceptionHandler);
-//    }
-//
-//    private static function exceptionHandler(Exception $e){
-//        var_dump($e);
-//    }
-//
-//    private static function errorHandler(int $errno, string $errstr, string $errfile, int $errline, array $context){
-//        var_dump([$errno, $errstr, $errfile, $errline, $context]);
-//    }
-
 }

@@ -11,7 +11,7 @@ namespace Bravo\Lib;
 
 class View
 {
-    private $layout = PROJECT_ROOT."/view/layout.php";
+    private $layout = PROJECT_ROOT."/view/layout.phtml";
     private $view;
 
     /**
@@ -21,7 +21,8 @@ class View
      */
     public function __construct(string $viewPath, array $data)
     {
-        $this->view = $viewPath;
+        ob_start();
+        $this->view = PROJECT_ROOT."/view/{$viewPath}.phtml";
         foreach ($data as $key => $item) {
             $this->{"$key"} = $item;
         }
@@ -49,7 +50,8 @@ class View
      * @return string
      */
     public function getContent() : string{
-        return $this->getTemplate($this->view);
+        $content = $this->getTemplate($this->view);
+        return $content;
     }
 
     /**
@@ -57,7 +59,8 @@ class View
      */
     public function spitLayout() : string
     {
-        return $this->getTemplate($this->layout);
+        $content = $this->getTemplate($this->layout);
+        return $content;
     }
 
     /**
@@ -65,7 +68,6 @@ class View
      * @return string
      */
     private function getTemplate($path) : string{
-        ob_start();
         include $path;
         $content = ob_get_contents();
         ob_end_clean();

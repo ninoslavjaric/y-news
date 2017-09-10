@@ -25,7 +25,7 @@ class Container
     /**
      * @var array
      */
-    private $parameters = [];
+    private $parameters;
 
     /**
      * Generator constructor.
@@ -33,7 +33,7 @@ class Container
      * @param string $method
      * @param array $parameters
      */
-    public function __construct(Controller $controller, string $method, array $parameters = null)
+    public function __construct(Controller $controller, string $method = "getIndex", array $parameters = [])
     {
         $this->controller = $controller;
         $this->method = $method;

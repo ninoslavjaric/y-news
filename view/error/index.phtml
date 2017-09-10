@@ -1,0 +1,46 @@
+<?php
+/** @var Exception $exception */
+$exception = $this->error;
+?>
+<div class="row">
+    <div class="col-sm-12">
+        <h1><?=$exception->getMessage()?></h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <h5><?=$exception->getFile()?></h5>
+    </div>
+    <div class="col-sm-6">
+        <h5><?=$exception->getLine()?></h5>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Trace</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>File</th>
+                <th>Line</th>
+                <th>Method</th>
+                <th>Class</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($exception->getTrace() as $trace): ?>
+            <tr>
+                <td><?=$trace['file']?></td>
+                <td><?=$trace['line']?></td>
+                <td><?=$trace['function']?></td>
+                <td><?=$trace['class']?></td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

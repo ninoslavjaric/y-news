@@ -1,9 +1,27 @@
-<html>
+<html lang="en">
 <head>
-    <title>Test</title>
+    <title><?=isset($this->title) ? $this->title : "Yahoo-portal"?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/script.js"></script>
 </head>
 <body>
-<h1>Djes</h1>
-<?=$this->getContent()?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 navbar-parent">
+            <div class="navbar-y">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container top-margin">
+    <?=$this->getContent()?>
+</div>
+
 </body>
 </html>
