@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js"></script>
 </head>
@@ -14,7 +15,34 @@
     <div class="row">
         <div class="col-sm-12 navbar-parent">
             <div class="navbar-y">
-
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h1>Y-news</h1>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="btn-group btn-group-justified menu menu-margin-top" role="group" aria-label="...">
+                                <div class="btn-group" role="group"><a class="btn btn-default">Home</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default">Science</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default">Tech</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default">World</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default">Politics</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default">Health</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default">Contact</a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <form action="#">
+                                <div class="form-group search menu-margin-top">
+                                    <input type="text" class="form-control" id="query" placeholder="Search">
+                                    <button>
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -22,6 +50,21 @@
 <div class="container top-margin">
     <?=$this->getContent()?>
 </div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="collapse navbar-collapse pull-right" id="footer">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>
