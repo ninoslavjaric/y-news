@@ -11,5 +11,5 @@ namespace Bravo\Lib\Http;
 
 class JsonResponse extends Response
 {
-
+    protected $contentType = "application/json";
 }

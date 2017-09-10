@@ -9,7 +9,7 @@
 namespace Bravo\Lib\Event;
 
 
-class EventListener
+class EventContainer
 {
     /**
      * @var \Closure[]

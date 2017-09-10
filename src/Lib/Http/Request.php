@@ -9,6 +9,9 @@
 namespace Bravo\Lib\Http;
 
 
+use Bravo\Controller\IndexController;
+use Bravo\Lib\Controller\Container;
+
 class Request
 {
     /**
@@ -24,6 +27,11 @@ class Request
      * @var string
      */
     private $method;
+
+    /**
+     * @var string
+     */
+    private $path;
 
     /**
      * @return array
@@ -88,4 +96,51 @@ class Request
         return $this->params[$key];
     }
 
+    /**
+     * @return string
+     */
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param string $path
+     * @return $this
+     */
+    public function setPath(string $path)
+    {
+        preg_match('/^([^?]+)/', $path, $match);
+        $this->path = $match[1];
+        return $this;
+    }
+
+    /**
+     * @return Container
+     */
+    public function getControllerContainer(){
+        $directive = [
+            'controller'  =>  IndexController::class,
+            'method'   =>  strtolower($this->getMethod()).'Index'
+        ];
+        $path = $this->getPath();
+        $fragments = explode("/", $path);
+        array_shift($fragments);
+        foreach ($fragments as $key => $fragment) {
+            switch ($key){
+                case 0:
+                    $directive['controller'] = "Bravo\\Controller\\".ucfirst($fragment)."Controller";
+                    break;
+                case 1:
+                    $directive['method'] = strtolower($this->getMethod()).ucfirst($fragment);
+                    break;
+                default:
+                    $directive['arguments'][] = $fragment;
+            }
+        }
+        $instance = new $directive['controller'];
+        if(isset($directive['arguments']))
+            return new Container($instance, $directive['method'], $directive['arguments']);
+        return new Container($instance, $directive['method']);
+    }
 }
