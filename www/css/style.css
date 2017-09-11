@@ -74,8 +74,47 @@ body {
     background: #d5c68a;
     border: transparent;
 }
-.menu a:hover {
-    background: black;
-    color: #d5c68a;
+.menu a:hover,
+.menu a:active,
+.menu a:active:hover,
+.menu a:focus,
+.menu a.active,
+.menu a.active:active:hover
+{
+    background: black!important;
+    color: #d5c68a!important;
     border: transparent;
+}
+
+.navbar-y .btn-group>div:first-child>a, .navbar-y .btn-group>div:last-child>a {
+    border-radius: 6px;
+}
+
+div#footer {
+    background-color: #d5c68a;
+    border-radius: 15px;
+}
+
+div#footer p {
+    display: inline-block;
+    padding: 15px;
+    margin: 0;
+    line-height: 20px;
+}
+#footer li.active>a,
+#footer li>a:hover,
+#footer li>a:focus,
+#footer li>a:focus:hover
+{
+    background: #7b2e00;
+    color: #d5c68a;
+}
+
+#footer li>a, #footer
+p {
+    color: #7b2e00;
+}
+
+hr {
+    border-color: #000;
 }
