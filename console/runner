@@ -5,3 +5,7 @@
  * Date: 9/8/17
  * Time: 11:36 PM
  */
+
+require_once "../loaders/startup.php";
+$current = PROJECT_ROOT;
+die;

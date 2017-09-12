@@ -11,5 +11,11 @@ namespace Dto;
 
 class Article
 {
-
+    public $category;
+    public $title;
+    public $description;
+    public $link;
+    public $pubDate;
+    public $source;
+    public $guid;
 }
