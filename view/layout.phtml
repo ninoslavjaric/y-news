@@ -51,7 +51,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="text-center">
-                Yahoo news
+                <?=isset($this->title) ? $this->title : "Yahoo news"?>
             </h1>
         </div>
     </div>
@@ -60,7 +60,9 @@
             <hr/>
         </div>
     </div>
-    <?=$this->getContent()?>
+    <div class="main-content">
+        <?=$this->getContent()?>
+    </div>
 </div>
 <footer>
     <div class="container">
@@ -71,9 +73,9 @@
                         Copyleft &copy; 2016 <strong>Y-news</strong>. All lefts Reserved
                     </p>
                     <ul class="nav navbar-nav pull-right">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/about">About us</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
             </div>

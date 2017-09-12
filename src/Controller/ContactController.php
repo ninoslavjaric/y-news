@@ -12,9 +12,9 @@ namespace Bravo\Controller;
 use Bravo\Lib\Controller;
 use Bravo\Lib\Http\Response;
 
-class AboutController extends Controller
+class ContactController extends Controller
 {
     public function getIndex(){
-        return new Response(['title'=>"About us"], "about/index");
+        return new Response(['title'=>"Contact"], "contact/index");
     }
 }
