@@ -132,6 +132,7 @@ hr {
 
 .main-content .panel-body h3 {
     color: #7b2e00;
+    margin-bottom:25px;
 }
 .main-content .panel-body {
     padding: 15px 10%;
@@ -144,6 +145,13 @@ h1 {
 }
 .navbar-y h1 {
     color: white;
+}
+.main-content .btn.btn-default {
+    background: #7b2e00;
+    color: white;
+}
+.main-content .panel-body .row {
+    margin-bottom: 20px;
 }
 
 @media (min-width: 1200px) {
