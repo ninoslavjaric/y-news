@@ -8,5 +8,7 @@
 spl_autoload_register(function($class){
     $file = str_replace(["Bravo", "\\"], ["src", "/"], $class);
     $file = "../{$file}.php";
+    if(!file_exists($file))
+        throw new Exception("File {$file} does not exist!");
     require_once $file;
 });

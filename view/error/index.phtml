@@ -34,10 +34,10 @@ $exception = $this->error;
             <tbody>
             <?php foreach ($exception->getTrace() as $trace): ?>
             <tr>
-                <td><?=$trace['file']?></td>
-                <td><?=$trace['line']?></td>
-                <td><?=$trace['function']?></td>
-                <td><?=$trace['class']?></td>
+                <td><?=isset($trace['file'])?$trace['file']:"#"?></td>
+                <td><?=isset($trace['line'])?$trace['line']:"#"?></td>
+                <td><?=isset($trace['function'])?$trace['function']:"#"?></td>
+                <td><?=isset($trace['class'])?$trace['class']:"#"?></td>
             </tr>
             <?php endforeach; ?>
             </tbody>

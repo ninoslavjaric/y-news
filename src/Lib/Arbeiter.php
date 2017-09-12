@@ -35,17 +35,26 @@ class Arbeiter
     public static function init(){
         ini_set("display_errors", "on");
 
-        set_error_handler(function($a, $b, $c, $d, $e){
-            var_dump([$a, $b, $c, $d, $e]);
-        });
 
         self::initExceptionHandler();
+//        self::initErrorHandler();
         static::initEventContainer();
         static::initRequest();
         static::initController();
         static::printResponse();
     }
-
+//    private static function initErrorHandler(){
+//        set_error_handler(function($a, $b, $c, $d, $e){
+//            var_dump([$a, $b, $c, $d, $e]);
+//            $container = new Container(new ErrorController, "getError", [new Exception($b)]);
+//            Arbeiter::$controller = $container
+//                ->getController()
+//                ->setRequest(Arbeiter::$request)
+//                ->setResponse($container->getResponse())
+//            ;
+//            Arbeiter::printResponse();
+//        });
+//    }
     private static function initExceptionHandler(){
         set_exception_handler(function ($e){
             $container = new Container(new ErrorController, "getIndex", [$e]);
