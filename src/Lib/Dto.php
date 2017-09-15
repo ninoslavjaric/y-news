@@ -8,21 +8,22 @@
 
 namespace Bravo\Lib;
 
-
+/**
+ * Class Dto
+ * @package Bravo\Lib
+ * @property int $id
+ */
 class Dto
 {
     /**
-     * @var int
-     */
-    private $id;
-
-    /**
      * Dto constructor.
      * @param int $id
+     * @return $this
      */
-    final public function __construct($id = 0)
+    final public function setId(int $id)
     {
         $this->id = $id;
+        return $this;
     }
 
     /**

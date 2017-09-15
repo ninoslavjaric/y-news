@@ -39,6 +39,14 @@ interface Storable extends Instanceable
     public function orderBy($key, $asc = true):Storable;
 
     /**
+     * @param int $chunk
+     * @param bool $offset
+     * @return Storable
+     */
+    public function limit(int $chunk, $offset = false):Storable;
+
+
+    /**
      * @param string $type
      * @return Dto[]
      */

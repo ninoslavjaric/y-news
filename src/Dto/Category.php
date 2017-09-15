@@ -18,6 +18,10 @@ class Category extends Dto
      */
     private $key;
 
+    /**
+     * @var string
+     */
+    private $title;
 
     /**
      * @return string
@@ -54,8 +58,4 @@ class Category extends Dto
         $this->title = $title;
         return $this;
     }
-    /**
-     * @var string
-     */
-    private $title;
 }

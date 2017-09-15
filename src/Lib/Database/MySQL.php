@@ -79,7 +79,8 @@ class MySQL extends \mysqli implements Storable
      */
     public function where(string $condition): Storable
     {
-        // TODO: Implement where() method.
+        $this->query .= "WHERE {$condition}";
+        return $this;
     }
 
     /**
@@ -89,7 +90,23 @@ class MySQL extends \mysqli implements Storable
      */
     public function orderBy($key, $asc = true): Storable
     {
-        // TODO: Implement orderBy() method.
+        $direction = $asc ? "ASC" : "DESC";
+        $this->query .= " ORDER BY {$key} {$direction}";
+        return $this;
+    }
+
+    /**
+     * @param int $chunk
+     * @param bool $offset
+     * @return Storable
+     */
+    public function limit(int $chunk, $offset = false): Storable
+    {
+        if(is_numeric($offset))
+            $this->query .= " LIMIT {$chunk}, {$offset}";
+        else
+            $this->query .= " LIMIT {$chunk}";
+        return $this;
     }
 
     /**
@@ -117,9 +134,8 @@ class MySQL extends \mysqli implements Storable
             while ($dto = $result->fetch_object($type)) {
                 $dtos[] = $dto;
             }
-
-            /* close statement */
             $stmt->close();
+            return $dtos;
         }
     }
 }

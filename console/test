@@ -3,4 +3,7 @@
 require_once "../loaders/startup.php";
 
 $test = new \Bravo\Dao\Category;
-$test->getAll();
+$ds = $test->getById(1);
+die;
+//foreach ($ds as $d)
+//    echo $d->getId();

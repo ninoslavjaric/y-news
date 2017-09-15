@@ -24,7 +24,6 @@ abstract class Dao
      * @var Instanceable
      */
     private static $adapter;
-
     /**
      * @return Storable
      */
@@ -33,30 +32,43 @@ abstract class Dao
             self::$adapter = Config::get("dao.adapter")::getInstance();
         return self::$adapter;
     }
-
     /**
      * @return Dto[]
      */
     public function getAll(): array {
-        $test = self::getAdapter()->select($this)->get($this->dtoType);
-        return [];
+        return self::getAdapter()
+            ->select($this)
+            ->get($this->dtoType)
+        ;
     }
-
     /**
      * @param int $id
      * @return Dto
+     * @throws \Exception
      */
     public function getById(int $id): Dto{
-        return null;
+        $result = self::getAdapter()
+            ->select($this)
+            ->where("id = {$id}")
+            ->get($this->dtoType)
+        ;
+        if($result)
+            return current($result);
+        throw new \Exception("No Dto with id = {$id}");
     }
-
     /**
      * @param string $column
      * @param $value
-     * @return Dto[]
+     * @param bool $like
+     * @return array
      */
-    public function getBy(string $column, $value): array {
-        return null;
+    public function getBy(string $column, $value, bool $like = false): array {
+        $comparator = $like ? "LIKE" : "=";
+        $value = $like ? "%{$value}%" : $value;
+        return self::getAdapter()
+            ->select($this)
+            ->where("{$column} {$comparator} '{$value}'")
+            ->get($this->dtoType)
+        ;
     }
-
 }
