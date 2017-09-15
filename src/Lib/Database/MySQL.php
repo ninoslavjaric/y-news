@@ -9,7 +9,10 @@
 namespace Bravo\Lib\Database;
 
 
-class MySQL extends \mysqli implements Initializable
+use Bravo\Lib\Config;
+use Bravo\Lib\Contracts\Instanceable;
+
+class MySQL extends \mysqli implements Instanceable
 {
     private static $params = [
         'host'  =>  "localhost",
@@ -17,20 +20,27 @@ class MySQL extends \mysqli implements Initializable
         'username'  =>  "root",
         'password'  =>  "",
     ];
+    /**
+     * @var static
+     */
+    private static $instance;
 
     /**
-     * @param array $params
-     * @return Initializable
+     * @return Instanceable
      */
-    public static function getInstance(array $params): Initializable
+    public static function getInstance(): Instanceable
     {
-        $params =   array_merge(self::$params, $params);
-        return new self(
-            $params['host'],
-            $params['username'],
-            $params['password'],
-            $params['dbname'],
-            $params['port']
-        );
+        if(!isset(self::$instance)){
+            $params = Config::get("database.mysql");
+            $params =   array_merge(self::$params, $params);
+            self::$instance = new self(
+                $params['host'],
+                $params['username'],
+                $params['password'],
+                $params['dbname'],
+                $params['port']
+            );
+        }
+        return self::$instance;
     }
 }

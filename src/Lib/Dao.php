@@ -6,13 +6,16 @@
  * Time: 11:23 AM
  */
 
-namespace Dao;
+namespace Bravo\Lib;
 
 
-abstract class Model
+abstract class Dao
 {
+    private static function getDbAdapter(){
+
+    }
     /**
-     * @return Model[]
+     * @return Dao[]
      */
     public function getAll(): array {
         return null;
@@ -20,16 +23,16 @@ abstract class Model
 
     /**
      * @param int $id
-     * @return Model
+     * @return Dao
      */
-    public function getById(int $id): Model{
+    public function getById(int $id): Dao{
         return null;
     }
 
     /**
      * @param string $column
      * @param $value
-     * @return Model[]
+     * @return Dao[]
      */
     public function getBy(string $column, $value): array {
         return null;

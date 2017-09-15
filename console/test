@@ -1,0 +1,6 @@
+<?php
+
+require_once "../loaders/startup.php";
+
+\Bravo\Lib\Cache::set("test","aaaaa");
+var_dump(\Bravo\Lib\Cache::get("test"));

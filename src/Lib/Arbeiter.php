@@ -12,96 +12,134 @@ namespace Bravo\Lib;
 use Bravo\Controller\IndexController;
 use Bravo\Lib\Controller\Container;
 use Bravo\Lib\Controller\ErrorController;
+use Bravo\Lib\Contracts\Instanceable;
 use Bravo\Lib\Event\EventContainer;
 use Bravo\Lib\Http\Request;
 use Exception;
 
-class Arbeiter
+class Arbeiter implements Instanceable
 {
     /**
      * @var EventContainer
      */
-    private static $eventContainer;
+    private $eventContainer;
 
     /**
      * @var Request
      */
-    private static $request;
+    private $request;
+
     /**
      * @var Controller
      */
-    public static $controller;
+    private $controller;
+
+    /**
+     * @var static
+     */
+    private static $instance;
+
+    /**
+     * @return Request
+     */
+    public function getRequest(): Request
+    {
+        return $this->request;
+    }
+
+    /**
+     * @param Controller $controller
+     * @return Arbeiter
+     */
+    public function setController(Controller $controller): Arbeiter
+    {
+        $this->controller = $controller;
+        return $this;
+    }
+
+
+    /**
+     * @return Controller
+     */
+    public function getController(): Controller
+    {
+        return $this->controller;
+    }
+
+    /**
+     * @return Instanceable
+     */
+    public static function getInstance(): Instanceable{
+        if(!isset(self::$instance))
+            self::$instance = new static;
+        return self::$instance;
+    }
 
     public static function init(){
-        ini_set("display_errors", "on");
-
-
-        self::initExceptionHandler();
-//        self::initErrorHandler();
-        static::initEventContainer();
-        static::initRequest();
-        static::initController();
-        static::printResponse();
+        if(Config::get("app.debug"))
+            ini_set("display_errors", "on");
+        self::getInstance()
+            ->initExceptionHandler()
+            ->initEventContainer()
+            ->initRequest()
+            ->initController()
+            ->printResponse()
+        ;
     }
-//    private static function initErrorHandler(){
-//        set_error_handler(function($a, $b, $c, $d, $e){
-//            var_dump([$a, $b, $c, $d, $e]);
-//            $container = new Container(new ErrorController, "getError", [new Exception($b)]);
-//            Arbeiter::$controller = $container
-//                ->getController()
-//                ->setRequest(Arbeiter::$request)
-//                ->setResponse($container->getResponse())
-//            ;
-//            Arbeiter::printResponse();
-//        });
-//    }
-    private static function initExceptionHandler(){
+
+    private function initExceptionHandler(){
+
         set_exception_handler(function ($e){
+            if(!Config::get("app.debug"))
+                die;
             $container = new Container(new ErrorController, "getIndex", [$e]);
-            Arbeiter::$controller = $container
+            Arbeiter::getInstance()->setController($container
                 ->getController()
-                ->setRequest(Arbeiter::$request)
+                ->setRequest(Arbeiter::getInstance()->getRequest())
                 ->setResponse($container->getResponse())
-            ;
-            Arbeiter::printResponse();
+            )->printResponse();
         });
+        return $this;
     }
 
-    private static function initEventContainer(){
-        static::$eventContainer = new EventContainer;
+    private function initEventContainer(){
+        $this->eventContainer = new EventContainer;
+        return $this;
     }
 
-    public static function getEventContainer():EventContainer{
-        return static::$eventContainer;
+    public function getEventContainer():EventContainer{
+        return $this->eventContainer;
     }
 
-    private static function initRequest(){
+    private function initRequest(){
         $request = (new Request)
             ->setParams($_REQUEST)
             ->setHeaders(getallheaders())
             ->setMethod($_SERVER['REQUEST_METHOD'])
             ->setPath($_SERVER['REQUEST_URI'])
         ;
-        static::$request = $request;
+        $this->request = $request;
+        return $this;
     }
 
     /**
      * Inits and processes a request
      */
-    private static function initController()
+    private function initController()
     {
-        $container = self::$request->getControllerContainer();
+        $container = $this->request->getControllerContainer();
         $container->validate();
-        if(!self::$controller)
-            self::$controller = $container
+        if(!$this->controller)
+            $this->controller = $container
                 ->getController()
-                ->setRequest(self::$request)
+                ->setRequest($this->request)
                 ->setResponse($container->getResponse())
             ;
+        return $this;
     }
 
-    private static function printResponse()
+    private function printResponse()
     {
-        echo static::$controller->getResponse();
+        echo $this->controller->getResponse();
     }
 }

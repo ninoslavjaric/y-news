@@ -11,7 +11,7 @@ namespace Dao;
 
 use Bravo\Lib\Dao;
 
-class Article extends Dao
+class Category extends Dao
 {
 
 }
