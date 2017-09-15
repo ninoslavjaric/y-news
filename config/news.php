@@ -10,5 +10,5 @@ return [
     'tech'  =>  "http://news.yahoo.com/rss/tech",
     'world'  =>  "http://news.yahoo.com/rss/world",
     'politics'  =>  "http://news.yahoo.com/rss/politics",
-    'health'  =>  "http://news.yahoo.com/rss/health/",
+    'health'  =>  "http://news.yahoo.com/rss/health",
 ];

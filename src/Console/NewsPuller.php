@@ -11,11 +11,17 @@ namespace Bravo\Console;
 
 use Bravo\Lib\Console;
 
+/**
+ * Class NewsPuller
+ * @package Bravo\Console
+ * @name bravo-news
+ * @option -c
+ */
 class NewsPuller extends Console
 {
 
-    protected function init()
+    protected function execute()
     {
-        $this->name = "bravo-news";
+        die;
     }
 }

@@ -9,8 +9,7 @@
 namespace Bravo\Lib\Feed\Parser;
 
 
-use Bravo\Lib\Feed\Item;
-use Dto\Article;
+use \Bravo\Dto\Article;
 
 class Xml extends \SimpleXMLElement
 {

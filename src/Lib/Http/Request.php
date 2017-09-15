@@ -125,7 +125,8 @@ class Request
         ];
         $path = $this->getPath();
         $fragments = explode("/", $path);
-        array_shift($fragments);
+        $fragments = array_slice($fragments, 1);
+//        array_shift($fragments);
         foreach ($fragments as $key => $fragment) {
             if($key < 2 && !($fragment = trim($fragment)))
                 continue;
