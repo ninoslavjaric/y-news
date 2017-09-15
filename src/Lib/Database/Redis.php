@@ -32,7 +32,7 @@ class Redis extends RealRedis implements Instanceable, Cacheable
             $params = Config::get("database.redis");
 
             $params =   array_merge(self::$params, $params);
-            $redis = new RealRedis;
+            $redis = new self;
 
             $redis->connect($params['host'], $params['port']);
             if(isset($params['dbname']))

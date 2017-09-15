@@ -15,19 +15,37 @@ final class Cache
 {
     private static $adapter;
 
+    /**
+     * @return Cacheable
+     */
     private static function getAdapter():Cacheable{
         if(!isset(self::$adapter))
             self::$adapter = Config::get("cache.adapter")::getInstance();
         return self::$adapter;
     }
 
+    /**
+     * @param $key
+     * @return string
+     */
     public static function get($key):string {
-        return "123";
+        return self::getAdapter()->getItem($key);
     }
-    public static function set($key, $value){
-        self::getAdapter()->set($key,$value);
-    }
-    public static function del($key){
 
+    /**
+     * @param $key
+     * @param $value
+     * @return Cacheable
+     */
+    public static function set($key, $value){
+        return self::getAdapter()->setItem($key, $value);
+    }
+
+    /**
+     * @param $key
+     * @return Cacheable
+     */
+    public static function del($key){
+        return self::getAdapter()->removeItem($key);
     }
 }
