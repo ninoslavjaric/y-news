@@ -6,12 +6,14 @@
  * Time: 11:21 PM
  */
 
-namespace Dao;
+namespace Bravo\Dao;
 
 
 use Bravo\Lib\Dao;
 
 class Category extends Dao
 {
+    public $table = "categories";
+    public $dtoType = \Bravo\Dto\Category::class;
 
 }

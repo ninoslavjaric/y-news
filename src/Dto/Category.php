@@ -18,6 +18,7 @@ class Category extends Dto
      */
     private $key;
 
+
     /**
      * @return string
      */

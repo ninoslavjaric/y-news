@@ -2,6 +2,5 @@
 
 require_once "../loaders/startup.php";
 
-\Bravo\Lib\Cache::set("test","aaaaa");
-var_dump(\Bravo\Lib\Cache::get("test"));
-\Bravo\Lib\Cache::del("test","aaaaa");
+$test = new \Bravo\Dao\Category;
+$test->getAll();

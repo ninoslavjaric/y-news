@@ -9,30 +9,51 @@
 namespace Bravo\Lib;
 
 
+use Bravo\Lib\Contracts\Instanceable;
+use Bravo\Lib\Contracts\Storable;
+
+/**
+ * Class Dao
+ * @package Bravo\Lib
+ * @property string $table
+ * @property string dtoType
+ */
 abstract class Dao
 {
-    private static function getDbAdapter(){
-
-    }
     /**
-     * @return Dao[]
+     * @var Instanceable
+     */
+    private static $adapter;
+
+    /**
+     * @return Storable
+     */
+    protected static function getAdapter(){
+        if(!isset(self::$adapter))
+            self::$adapter = Config::get("dao.adapter")::getInstance();
+        return self::$adapter;
+    }
+
+    /**
+     * @return Dto[]
      */
     public function getAll(): array {
-        return null;
+        $test = self::getAdapter()->select($this)->get($this->dtoType);
+        return [];
     }
 
     /**
      * @param int $id
-     * @return Dao
+     * @return Dto
      */
-    public function getById(int $id): Dao{
+    public function getById(int $id): Dto{
         return null;
     }
 
     /**
      * @param string $column
      * @param $value
-     * @return Dao[]
+     * @return Dto[]
      */
     public function getBy(string $column, $value): array {
         return null;
