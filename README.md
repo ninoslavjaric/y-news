@@ -1,8 +1,5 @@
 # Yahoo portal #
 
-### Uvod? ###
-
-* Uputstvo za koristenje aplikacije
 * [Ninoslav Jaric](https://www.jaric.online/)
 
 ### Kako osvjezavati bazu? ###
@@ -17,3 +14,11 @@ Crob job pokrece periodicno skriptu koja osvjezava bazu iz feed-a.
 */15 * * * * /usr/bin/php /var/www/bravo.yf/console/runner bravo-news -c health
 
 ```
+
+### MySQL Baza ###
+
+> username: bravo
+>
+> password: bravo
+>
+> database: bravo

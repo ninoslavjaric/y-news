@@ -95,6 +95,17 @@ abstract class Dao
             ->get($class::$dtoType)
         ;
     }
+    /**
+     * @param string $column
+     * @param $value
+     * @param bool $like
+     * @return Dto|null
+     */
+    public function getOneBy(string $column, $value, bool $like = false) {
+        if($result = $this->getBy($column, $value, $like))
+            current($result);
+        return null;
+    }
 
     public function persist(Dto &$object){
         self::getAdapter()->insertOrUpdate($object);
