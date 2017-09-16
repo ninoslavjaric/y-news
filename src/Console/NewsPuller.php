@@ -41,7 +41,8 @@ class NewsPuller extends Console
                 $article->setId($check->getId());
             }
             Article::getInstance()->persist($article);
+            echo "Recorded {$article->getId()}\n";
         }
-
+        echo "{$category->getKey()} is done.\n";
     }
 }
