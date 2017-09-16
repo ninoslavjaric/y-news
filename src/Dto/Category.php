@@ -24,6 +24,11 @@ class Category extends Dto
     private $title;
 
     /**
+     * @var Article[]
+     */
+    private $articles = [];
+
+    /**
      * @return string
      */
     public function getKey(): string
@@ -58,4 +63,26 @@ class Category extends Dto
         $this->title = $title;
         return $this;
     }
+
+    /**
+     * @return Article[]
+     */
+    public function getArticles(): array
+    {
+        if(!$this->articles)
+            $this->articles = (\Bravo\Dao\Article::getInstance())
+                ->getBy("category_id", $this->id);
+        return $this->articles;
+    }
+
+    /**
+     * @param Article[] $articles
+     * @return Category
+     */
+    public function setArticles(array $articles): Category
+    {
+        $this->articles = $articles;
+        return $this;
+    }
+
 }

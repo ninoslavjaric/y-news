@@ -11,10 +11,15 @@ namespace Bravo\Dto;
 
 use Bravo\Lib\Dto;
 
+/**
+ * Class Article
+ * @package Bravo\Dto
+ */
 class Article extends Dto
 {
     /**
      * @var Category
+     * @column category_id
      */
     private $category;
     /**
@@ -31,6 +36,7 @@ class Article extends Dto
     private $link;
     /**
      * @var \DateTime
+     * @column pub_date
      */
     private $pubDate;
     /**
@@ -47,6 +53,9 @@ class Article extends Dto
      */
     public function getCategory(): Category
     {
+        if(!$this->category)
+            $this->category = (\Bravo\Dao\Category::getInstance())
+                ->getById($this->category_id);
         return $this->category;
     }
 
@@ -119,6 +128,8 @@ class Article extends Dto
      */
     public function getPubDate(): \DateTime
     {
+        if(!$this->pubDate)
+            $this->pubDate = (new \DateTime)->setTimestamp($this->pub_date);
         return $this->pubDate;
     }
 

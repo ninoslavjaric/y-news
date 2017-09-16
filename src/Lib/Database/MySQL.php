@@ -9,19 +9,24 @@
 namespace Bravo\Lib\Database;
 
 
+use Bravo\Lib\Cache;
 use Bravo\Lib\Config;
 use Bravo\Lib\Contracts\Instanceable;
 use Bravo\Lib\Contracts\Storable;
 use Bravo\Lib\Dao;
 use Bravo\Lib\Dto;
 
+/**
+ * Class MySQL
+ * @package Bravo\Lib\Database
+ * @property string[] $cParams
+ */
 class MySQL extends \mysqli implements Storable
 {
     /**
      * @var string
      */
     private $query;
-
     /**
      * @var array
      */
@@ -35,6 +40,10 @@ class MySQL extends \mysqli implements Storable
      * @var static
      */
     private static $instance;
+    /**
+     * @var Dao
+     */
+    private $dao;
 
     /**
      * @return Instanceable
@@ -56,30 +65,26 @@ class MySQL extends \mysqli implements Storable
     }
 
     /**
-     * @return Storable
-     */
-    public function save(): Storable
-    {
-        // TODO: Implement save() method.
-    }
-
-    /**
      * @param Dao $dao
+     * @param bool $wholeRow
      * @return Storable
      */
     public function select(Dao $dao): Storable
     {
-        $this->query = "SELECT * FROM `{$dao->table}`";
+        $this->dao = $dao;
+        $this->query = "SELECT `id` FROM `{$dao->getTable()}`";
         return $this;
     }
 
     /**
      * @param string $condition
+     * @param array $params
      * @return Storable
      */
-    public function where(string $condition): Storable
+    public function where(string $condition, array $params = []): Storable
     {
-        $this->query .= "WHERE {$condition}";
+        $this->cParams = $params;
+        $this->query .= " WHERE {$condition}";
         return $this;
     }
 
@@ -112,30 +117,179 @@ class MySQL extends \mysqli implements Storable
     /**
      * @param string $type
      * @return Dto[]
+     * @throws \Exception
      */
-    public function get(string $type)
+    public function get()
     {
         if ($stmt = $this->prepare($this->query)) {
-
-//            /* bind parameters for markers */
-//            $stmt->bind_param("s", $city);
-
-            /* execute query */
-            $stmt->execute();
-
-            /* bind result variables */
-//            $stmt->bind_result($district);
-
+            if(count($this->cParams)){
+                $types = "";
+                foreach ($this->cParams as $key => &$param)
+                    $this->typeGenerator($types, $param);
+                $bindParams = array_merge([$types], $this->cParams);
+                if (!call_user_func_array([$stmt, "bind_param"], $bindParams))
+                    throw new \Exception("Binding parameters failed: ({$stmt->errno}) {$stmt->error}");
+            }
+            if (!$stmt->execute())
+                throw new \Exception("Execute failed: ({$stmt->errno}) {$stmt->error}");
             $result = $stmt->get_result();
-
-            /* fetch value */
-//            $stmt->fetch();
+            /** @var Dto $dtos */
             $dtos = [];
-            while ($dto = $result->fetch_object($type)) {
+            while ($id = $result->fetch_object()){
+                $dtoKey = "{$this->dao->getDtoType()}:id:{$id->id}";
+                if(!($dto = Dto::getObject($dtoKey))){
+                    if(!($dto = Cache::get($dtoKey))){
+                        if(($res = $this->query("SELECT * FROM `{$this->dao->getTable()}` WHERE `id` = {$id->id}"))->num_rows){
+                            $dto = $res->fetch_object($this->dao->getDtoType());
+                            Cache::set($dtoKey, $dto);
+                        }
+                    }
+                    Dto::addObject($dtoKey, $dto);
+                }
                 $dtos[] = $dto;
             }
             $stmt->close();
             return $dtos;
+        }
+        throw new \Exception($this->error);
+    }
+
+    /**
+     * @param Dto $object
+     * @return Dto $object
+     */
+    public function insertOrUpdate(Dto $object)
+    {
+        $reflector = new \ReflectionObject($object);
+        $properties = $reflector->getProperties();
+        $fields = [];
+        foreach ($properties as $key => &$property){
+            if(!($property = $this->propDefFilter($object,$property)))
+                continue;
+            $fields[$property->column] = $property->value;
+        }
+
+        if($id = $object->getId()){
+            $types = ""; $columns = [];
+
+            $values = [];
+            foreach ($fields as $key => &$field){
+                $this->typeGenerator($types, $field);
+                $columns[] = "`{$key}`=?";
+                $values[] = $field;
+            }
+            $columns = implode(", ", $columns);
+            $types .= "i";
+            $values[] = $id;
+            $this->query = "UPDATE `{$object->getTable()}` SET {$columns} WHERE id=?";
+        } else {
+            $types = ""; $columns = []; $questions = []; $values = [];
+
+            foreach ($fields as $key => &$field){
+                if(trim($key) == "id"){
+                    continue;
+                }
+                $this->typeGenerator($types, $field);
+                $columns[] = "`{$key}`";
+                $questions[] = "?";
+                $values[] = $field;
+            }
+            $columns = implode(", ", $columns);
+            $questions = implode(", ", $questions);
+            $this->query = "INSERT INTO `{$object->getTable()}` ({$columns}) VALUES ({$questions})";
+        }
+        if($id = $this->execute($this->query, $types, $values))
+            $object->setId($id);
+        return $object;
+    }
+
+    /**
+     * @param $query
+     * @param $types
+     * @param $parameters
+     * @return mixed|null
+     */
+    private function execute($query, $types, $parameters){
+        $params = [$types];
+        foreach ($parameters as $key => $parameter)
+            $params[] = &$parameters[$key];
+        try{
+            $this->begin_transaction();
+            if(!$stmt = $this->prepare($query))
+                throw new \Exception($this->error);
+            if (!call_user_func_array([$stmt, "bind_param"], $params))
+                throw new \Exception("Binding parameters failed: ({$stmt->errno}) {$stmt->error}");
+            if (!$stmt->execute())
+                throw new \Exception("Execute failed: ({$stmt->errno}) {$stmt->error}");
+            $id = $this->insert_id;
+            $this->commit();
+            return $id;
+        }catch (\Exception $e){
+            if($this->errno != 1062){
+                $content = date('l jS \of F Y h:i:s A')."\t{$e->getMessage()}\t{$e->getFile()}\t{$e->getLine()}\n";
+                file_put_contents(PROJECT_ROOT."/logs/exceptions.log", $content, FILE_APPEND);
+            }
+            $this->rollback();
+        }finally{
+            if(isset($stmt))
+                $stmt->close();
+        }
+        return null;
+    }
+
+    /**
+     * @param Dto $object
+     * @param \ReflectionProperty $property
+     * @return \stdClass
+     */
+    private function propDefFilter(Dto $object, \ReflectionProperty $property){
+        $column = $property->name;
+        $type = null;
+        if(preg_match('/\@column\s+([^\n]+)/', $property->getDocComment(), $matches))
+            $column = $matches[1];
+        if(preg_match('/\@var\s+([^\n]+)/', $property->getDocComment(), $matches))
+            $type = $matches[1];
+
+        $method = explode("_", $property->name);
+        foreach ($method as &$item)
+            $item = ucfirst($item);
+        $method = "get".implode($method);
+        if(!method_exists($object, $method))
+            return null;
+        $value = call_user_func_array([$object, $method], []);
+        if($type){
+            if($value instanceof \DateTime)
+                $value = $value->getTimestamp();
+            elseif(_class_exists("Bravo\\Dto\\{$type}"))
+                $value = $value->getId();
+        }
+        return (object)[
+            'column'    =>  $column,
+            'value'     =>  $value,
+        ];
+    }
+
+    private function typeGenerator(string &$types, &$param){
+        if (is_double($param))
+        {
+            $types .= "d";
+        }
+        elseif (is_int($param))
+        {
+            $types .= "i";
+        }
+        elseif (is_bool($param))
+        {
+            $param = $param ? 1 : 0;
+            $types .= "i";
+        }
+        elseif(is_string($param))
+        {
+            $types .= "s";
+        }
+        elseif($param instanceof \DateTime){
+            $param = $param->getTimestamp();
+            $types .= "i";
         }
     }
 }

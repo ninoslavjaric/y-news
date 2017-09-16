@@ -13,7 +13,7 @@ use Bravo\Lib\Dao;
 
 class Rate extends Dao
 {
-    public $table = "rates";
-    public $dtoType = \Bravo\Dto\Rate::class;
+    public static $table = "rates";
+    public static $dtoType = \Bravo\Dto\Rate::class;
 
 }

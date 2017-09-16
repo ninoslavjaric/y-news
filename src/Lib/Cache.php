@@ -28,8 +28,10 @@ final class Cache
      * @param $key
      * @return string
      */
-    public static function get($key):string {
-        return self::getAdapter()->getItem($key);
+    public static function get($key) {
+        if($result = self::getAdapter()->getItem($key))
+            return unserialize($result);
+        return null;
     }
 
     /**
@@ -38,7 +40,7 @@ final class Cache
      * @return Cacheable
      */
     public static function set($key, $value){
-        return self::getAdapter()->setItem($key, $value);
+        return self::getAdapter()->setItem($key, serialize($value));
     }
 
     /**

@@ -17,3 +17,10 @@ if (!function_exists('getallheaders')) {
         return $headers;
     }
 }
+function _class_exists($class){
+    try{
+        return class_exists($class);
+    }catch (\Exception $e){
+        return false;
+    }
+}

@@ -11,5 +11,3 @@ if($_SERVER["argc"]>1)
     \Bravo\Lib\Console::consoleInject(array_slice($_SERVER['argv'], 1));
 else
     throw new Exception("Not enough arguments.");
-$items = \Bravo\Lib\Feed\Parser\Xml::getInstance("http://news.yahoo.com/rss/health")->getItems();
-die;

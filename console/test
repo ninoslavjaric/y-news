@@ -2,8 +2,17 @@
 
 require_once "../loaders/startup.php";
 
-$test = new \Bravo\Dao\Category;
-$ds = $test->getById(1);
+/** @var \Bravo\Dao\Article $articleDao */
+/** @var \Bravo\Dto\Article $article */
+$articleDao = \Bravo\Dao\Article::getInstance();
+
+$article = $articleDao->getById(4);
+$article->setGuid("djesijeee");
+$articleDao->persist($article);
+
+$cnt = \Bravo\Lib\Dto::getObjects();
+
+$cat = $article->getCategory();
 die;
 //foreach ($ds as $d)
 //    echo $d->getId();

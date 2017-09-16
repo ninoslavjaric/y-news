@@ -11,19 +11,40 @@ namespace Bravo\Lib;
 
 use Bravo\Lib\Contracts\Instanceable;
 use Bravo\Lib\Contracts\Storable;
+use Bravo\Lib\Traits\ContainerBehaviour;
 
 /**
  * Class Dao
  * @package Bravo\Lib
- * @property string $table
- * @property string dtoType
  */
 abstract class Dao
 {
+    use ContainerBehaviour;
+
+    /**
+     * @var string
+     */
+    public static $dtoType;
+    /**
+     * @var string
+     */
+    public static $table;
+
     /**
      * @var Instanceable
      */
     private static $adapter;
+
+    protected function __construct()
+    {}
+
+    public function getDtoType(){
+        return static::$dtoType;
+    }
+    public function getTable(){
+        return static::$table;
+    }
+
     /**
      * @return Storable
      */
@@ -36,9 +57,10 @@ abstract class Dao
      * @return Dto[]
      */
     public function getAll(): array {
+        $class = get_class($this);
         return self::getAdapter()
             ->select($this)
-            ->get($this->dtoType)
+            ->get($class::$dtoType)
         ;
     }
     /**
@@ -47,10 +69,11 @@ abstract class Dao
      * @throws \Exception
      */
     public function getById(int $id): Dto{
+        $class = get_class($this);
         $result = self::getAdapter()
             ->select($this)
-            ->where("id = {$id}")
-            ->get($this->dtoType)
+            ->where("id = ?", [$id])
+            ->get($class::$dtoType)
         ;
         if($result)
             return current($result);
@@ -63,12 +86,27 @@ abstract class Dao
      * @return array
      */
     public function getBy(string $column, $value, bool $like = false): array {
+        $class = get_class($this);
         $comparator = $like ? "LIKE" : "=";
         $value = $like ? "%{$value}%" : $value;
         return self::getAdapter()
             ->select($this)
-            ->where("{$column} {$comparator} '{$value}'")
-            ->get($this->dtoType)
+            ->where("`{$column}` {$comparator} ?", [$value])
+            ->get($class::$dtoType)
         ;
+    }
+
+    public function persist(Dto &$object){
+        self::getAdapter()->insertOrUpdate($object);
+    }
+
+    /**
+     * @return Dao
+     */
+    public static function getInstance(){
+        if(isset(self::$container[static::class]))
+            return self::$container[static::class];
+        self::$container[static::class] = new static;
+        return self::$container[static::class];
     }
 }

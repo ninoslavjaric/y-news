@@ -10,10 +10,15 @@ namespace Bravo\Dao;
 
 
 use Bravo\Lib\Dao;
+use Bravo\Lib\Dto;
 
+/**
+ * Class Article
+ * @package Bravo\Dao
+ */
 class Article extends Dao
 {
-    public $table = "articles";
-    public $dtoType = \Bravo\Dto\Article::class;
+    public static $table = "articles";
+    public static $dtoType = \Bravo\Dto\Article::class;
 
 }

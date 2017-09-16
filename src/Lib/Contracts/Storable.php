@@ -14,10 +14,6 @@ use Bravo\Lib\Dto;
 
 interface Storable extends Instanceable
 {
-    /**
-     * @return Storable
-     */
-    public function save():Storable;
 
     /**
      * @param Dao $dao
@@ -27,9 +23,10 @@ interface Storable extends Instanceable
 
     /**
      * @param string $condition
+     * @param string[] $params
      * @return Storable
      */
-    public function where(string $condition):Storable;
+    public function where(string $condition, array $params = []):Storable;
 
     /**
      * @param $key
@@ -47,8 +44,13 @@ interface Storable extends Instanceable
 
 
     /**
-     * @param string $type
      * @return Dto[]
      */
-    public function get(string $type);
+    public function get();
+
+    /**
+     * @param Dto $object
+     * @return $object
+     */
+    public function insertOrUpdate(Dto $object);
 }
