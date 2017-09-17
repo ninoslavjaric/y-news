@@ -49,7 +49,7 @@ server {
 <VirtualHost *:80>
 	ServerName bravo.yf 
 	ServerAlias bravo-test.com
-	ServerAdmin webmaster@localhost
+	
 	DocumentRoot /pathToProject/www
 	<Directory /pathToProject/www>
 		AllowOverride None
