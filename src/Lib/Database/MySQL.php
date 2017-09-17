@@ -200,6 +200,8 @@ class MySQL extends \mysqli implements Storable
         }
         if($id = $this->execute($this->query, $types, $values))
             $object->setId($id);
+
+        Cache::del(get_class($object).":id:{$object->getId()}");
         return $object;
     }
 
@@ -258,10 +260,12 @@ class MySQL extends \mysqli implements Storable
             return null;
         $value = call_user_func_array([$object, $method], []);
         if($type){
-            if($value instanceof \DateTime)
-                $value = $value->getTimestamp();
-            elseif(_class_exists("Bravo\\Dto\\{$type}"))
-                $value = $value->getId();
+            if(!in_array($type, ['string','int','integer','bool','boolean','mixed','float','double'])){
+                if($value instanceof \DateTime)
+                    $value = $value->getTimestamp();
+                elseif(_class_exists("Bravo\\Dto\\{$type}"))
+                    $value = $value->getId();
+            }
         }
         return (object)[
             'column'    =>  $column,

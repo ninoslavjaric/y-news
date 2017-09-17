@@ -6,7 +6,7 @@
  * Time: 11:36 PM
  */
 
-require_once "../loaders/startup.php";
+require_once __DIR__."/../loaders/startup.php";
 if($_SERVER["argc"]>1)
     \Bravo\Lib\Console::consoleInject(array_slice($_SERVER['argv'], 1));
 else
