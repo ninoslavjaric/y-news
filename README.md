@@ -1,6 +1,6 @@
 # Yahoo portal #
 
-* [Ninoslav Jaric](https://www.jaric.online/)
+* [Ninoslav Jaric](http://www.jaric.online/)
 
 ### Kako osvjezavati bazu? ###
 
