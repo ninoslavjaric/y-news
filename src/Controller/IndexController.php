@@ -16,8 +16,11 @@ use Bravo\Lib\Http\Response;
 class IndexController extends Controller
 {
     public function getIndex(){
-        $articles = Article::getInstance()->getBy('category_id', 2);
+        $articles = Article::getInstance()->getAll('pub_date', false);
 
-        return new Response(['articles'=>$articles]);
+        return new Response([
+            'title'     =>  "Latest news",
+            'articles'  =>  $articles
+        ]);
     }
 }

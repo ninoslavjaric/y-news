@@ -122,11 +122,12 @@ class MySQL extends \mysqli implements Storable
     public function get()
     {
         if ($stmt = $this->prepare($this->query)) {
-            if(count($this->cParams)){
+            $params = isset($this->cParams) ? $this->cParams : [];
+            if($params){
                 $types = "";
-                foreach ($this->cParams as $key => &$param)
+                foreach ($params as $key => &$param)
                     $this->typeGenerator($types, $param);
-                $bindParams = array_merge([$types], $this->cParams);
+                $bindParams = array_merge([$types], $params);
                 if (!call_user_func_array([$stmt, "bind_param"], $bindParams))
                     throw new \Exception("Binding parameters failed: ({$stmt->errno}) {$stmt->error}");
             }

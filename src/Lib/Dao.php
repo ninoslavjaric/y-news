@@ -56,12 +56,11 @@ abstract class Dao
     /**
      * @return Dto[]
      */
-    public function getAll(): array {
-        $class = get_class($this);
-        return self::getAdapter()
-            ->select($this)
-            ->get($class::$dtoType)
-        ;
+    public function getAll($orderKey = null, $direction = true): array {
+        $storable = self::getAdapter()->select($this);
+        if($orderKey)
+            $storable = $storable->orderBy($orderKey, $direction);
+        return $storable->get();
     }
     /**
      * @param int $id
@@ -69,31 +68,37 @@ abstract class Dao
      * @throws \Exception
      */
     public function getById(int $id): Dto{
-        $class = get_class($this);
-        $result = self::getAdapter()
-            ->select($this)
-            ->where("id = ?", [$id])
-            ->get($class::$dtoType)
-        ;
-        if($result)
-            return current($result);
+//        $class = get_class($this);
+//        $result = self::getAdapter()
+//            ->select($this)
+//            ->where("id = ?", [$id])
+//            ->get($class::$dtoType)
+//        ;
+//        if($result)
+//            return current($result);
+        if($dto = $this->getOneBy("id", $id))
+            return $dto;
         throw new \Exception("No Dto with id = {$id}");
     }
+
     /**
      * @param string $column
      * @param $value
      * @param bool $like
+     * @param string|null $orderKey
+     * @param bool $direction
      * @return array
      */
-    public function getBy(string $column, $value, bool $like = false): array {
-        $class = get_class($this);
+    public function getBy(string $column, $value, bool $like = false, $orderKey = null, $direction = true): array {
         $comparator = $like ? "LIKE" : "=";
         $value = $like ? "%{$value}%" : $value;
-        return self::getAdapter()
+        $storable = self::getAdapter()
             ->select($this)
             ->where("`{$column}` {$comparator} ?", [$value])
-            ->get()
         ;
+        if($orderKey)
+            $storable = $storable->orderBy($orderKey, $direction);
+        return $storable->get();
     }
     /**
      * @param string $column
