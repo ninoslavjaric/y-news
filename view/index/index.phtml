@@ -3,8 +3,10 @@
 <div class="row">
     <?php foreach($articles as $article): ?>
     <div class="col-sm-6">
-        <div class="panel panel-default">
-            <div class="panel-heading"></div>
+        <div class="panel panel-default article-card">
+            <div class="panel-heading">
+                <?=$article->getPubDate()->format("D, d M Y H:i:s")?>
+            </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-12">
@@ -12,8 +14,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">
-                        <?=$article->getDescription()?>
+                    <div class="col-sm-6">
+                        <img src="<?= $article->getImage() ?>" alt="<?=$article->getTitle()?>" class="img-responsive">
+                    </div>
+                    <div class="col-sm-6">
+                        <p>
+                            <?=$article->getDescription()?>
+                        </p>
                     </div>
                 </div>
             </div>

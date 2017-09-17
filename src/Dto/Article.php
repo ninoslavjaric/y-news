@@ -10,6 +10,7 @@ namespace Bravo\Dto;
 
 
 use Bravo\Lib\Dto;
+use Bravo\Lib\Tool\Stringer;
 
 /**
  * Class Article
@@ -74,7 +75,7 @@ class Article extends Dto
      */
     public function getTitle(): string
     {
-        return $this->title;
+        return Stringer::filterTitle($this->title);
     }
 
     /**
@@ -92,7 +93,13 @@ class Article extends Dto
      */
     public function getDescription(): string
     {
-        return $this->description;
+        return Stringer::filterDescription(strip_tags($this->description));
+    }
+
+    public function getImage(){
+        if(preg_match('/<img[^>]+src="([^"]+)"[^>]+>/',$this->description, $matches))
+            return $matches[1];
+        return "/img/default.png";
     }
 
     /**

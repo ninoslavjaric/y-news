@@ -1,18 +1,5 @@
 <?php
 
-require_once "../loaders/startup.php";
-
-/** @var \Bravo\Dao\Article $articleDao */
-/** @var \Bravo\Dto\Article $article */
-$articleDao = \Bravo\Dao\Article::getInstance();
-
-$article = $articleDao->getById(4);
-$article->setGuid("djesijeee");
-$articleDao->persist($article);
-
-$cnt = \Bravo\Lib\Dto::getObjects();
-
-$cat = $article->getCategory();
-die;
-//foreach ($ds as $d)
-//    echo $d->getId();
+$test = '<p><a href="https://www.yahoo.com/news/rohingya-know-myanmars-deepening-crisis-174020009.html"><img src="" width="130" height="86" alt="Who are the Rohingya? What you should know about Myanmar&#39;s deepening crisis" align="left" title="Who are the Rohingya? What you should know about Myanmar&#39;s deepening crisis" border="0" ></a>Rohingya Muslims in Myanmar (Burma) have endured decades of persecution.  Some 370,000 Rohingya have fled to Bangladesh.  An estimated 1 million to 1.2 million live in Myanmarâ€™s western state of Rakhine, where they make up about a third of the population.<p><br clear="all">';
+$test = strip_tags($test);
+var_dump($test);

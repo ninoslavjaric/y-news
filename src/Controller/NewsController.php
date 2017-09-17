@@ -18,26 +18,30 @@ class NewsController extends Controller
 {
     /**
      * @param $key
-     * @return \Bravo\Dto\Article[]
+     * @return Response
      */
-    private function pickArticles($key){
+    private function pickData($key){
         $category = Category::getInstance()->getOneBy('key', $key);
-        return Article::getInstance()->getBy('category_id', $category->getId());
+        /** @var \Bravo\Dto\Category $category */
+        return new Response([
+            'articles'  =>  $category->getArticles(),
+            'title'     =>  $category->getTitle(),
+        ]);
 
     }
     public function getScience(){
-        return new Response(['articles'=>$this->pickArticles("science")]);
+        return $this->pickData("science");
     }
     public function getTech(){
-        return new Response(['articles'=>$this->pickArticles("tech")]);
+        return $this->pickData("tech");
     }
     public function getWorld(){
-        return new Response(['articles'=>$this->pickArticles("world")]);
+        return $this->pickData("world");
     }
     public function getPolitics(){
-        return new Response(['articles'=>$this->pickArticles("politics")]);
+        return $this->pickData("politics");
     }
     public function getHealth(){
-        return new Response(['articles'=>$this->pickArticles("health")]);
+        return $this->pickData("health");
     }
 }
