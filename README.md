@@ -7,11 +7,11 @@
 Crob job pokrece periodicno skriptu koja osvjezava bazu iz feed-a.
 
 ```bash
-*/15 * * * * /usr/bin/php /var/www/bravo.yf/console/runner bravo-news -c science
-*/15 * * * * /usr/bin/php /var/www/bravo.yf/console/runner bravo-news -c tech
-*/15 * * * * /usr/bin/php /var/www/bravo.yf/console/runner bravo-news -c world
-*/15 * * * * /usr/bin/php /var/www/bravo.yf/console/runner bravo-news -c politics
-*/15 * * * * /usr/bin/php /var/www/bravo.yf/console/runner bravo-news -c health
+*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c science
+*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c tech
+*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c world
+*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c politics
+*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c health
 
 ```
 
@@ -23,16 +23,16 @@ Crob job pokrece periodicno skriptu koja osvjezava bazu iz feed-a.
 >
 > database: bravo
 
-### Nginx configuration ###
+### Nginx konfiguracija ###
 ```nginx
 server {
 	server_name bravo.yf bravo-test.com;
-	root /var/www/bravo.yf/www;
+	root /pathToProject/www;
 	location / {
 		try_files $uri /index.php$is_args$args;
 	}
 	location ~ ^/index\.php(/|$) {
-		fastcgi_pass unix:/run/php/nino-fpm.sock;
+		fastcgi_pass unix:/run/php/socketName.sock;
 		include fastcgi_params;
 		fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
 		fastcgi_param DOCUMENT_ROOT $realpath_root;
@@ -40,23 +40,23 @@ server {
 	location ~ \.php$ {
 		return 404;
 	}
-	error_log /var/www/bravo.yf/logs/error.log;
-	access_log /var/www/bravo.yf/logs/access.log;
+	error_log /pathToProject/logs/error.log;
+	access_log /pathToProject/logs/access.log;
 }
 ```
-### Apache configuration ###
+### Apache konfiguracija ###
 ```apache
-<VirtualHost *:8888>
+<VirtualHost *:80>
 	ServerName bravo.yf 
 	ServerAlias bravo-test.com
 	ServerAdmin webmaster@localhost
-	DocumentRoot /var/www/bravo.yf/www
-	<Directory /var/www/bravo.yf/www>
+	DocumentRoot /pathToProject/www
+	<Directory /pathToProject/www>
 		AllowOverride None
 		Order Allow,Deny
 		Allow from All
 		<FilesMatch ".+\.ph(p[3457]?|t|tml)$">
-			SetHandler "proxy:unix:/run/php/nino-fpm.sock|fcgi://localhost"
+			SetHandler "proxy:unix:/run/php/socketName.sock|fcgi://localhost"
 	        </FilesMatch>
 		<IfModule mod_rewrite.c>
 			Options -MultiViews
@@ -65,7 +65,7 @@ server {
 			RewriteRule ^(.*)$ /index.php [QSA,L]
 		</IfModule>
 	</Directory>
-	ErrorLog /var/www/bravo.yf/logs/apache_error.log
-	CustomLog /var/www/bravo.yf/logs/apache_access.log combined
+	ErrorLog /pathToProject/logs/apache_error.log
+	CustomLog /pathToProject/logs/apache_access.log combined
 </VirtualHost>
 ```
