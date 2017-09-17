@@ -102,15 +102,12 @@ class MySQL extends \mysqli implements Storable
 
     /**
      * @param int $chunk
-     * @param bool $offset
+     * @param int $offset
      * @return Storable
      */
-    public function limit(int $chunk, $offset = false): Storable
+    public function limit(int $chunk, $offset = 0): Storable
     {
-        if(is_numeric($offset))
-            $this->query .= " LIMIT {$chunk}, {$offset}";
-        else
-            $this->query .= " LIMIT {$chunk}";
+        $this->query .= " LIMIT {$offset}, {$chunk}";
         return $this;
     }
 
@@ -121,6 +118,7 @@ class MySQL extends \mysqli implements Storable
      */
     public function get()
     {
+        $q = $this->query;
         if ($stmt = $this->prepare($this->query)) {
             $params = isset($this->cParams) ? $this->cParams : [];
             if($params){

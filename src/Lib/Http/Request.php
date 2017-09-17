@@ -133,7 +133,11 @@ class Request
             switch ($key){
                 case 0:
                     if(trim($fragment)){
-                        $directive['controller'] = "Bravo\\Controller\\".ucfirst($fragment)."Controller";
+                        $fragment = explode("-", $fragment);
+                        foreach ($fragment as &$item)
+                            $item = ucfirst($item);
+
+                        $directive['controller'] = "Bravo\\Controller\\".implode("", $fragment)."Controller";
                     }
                     break;
                 case 1:

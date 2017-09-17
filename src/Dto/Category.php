@@ -67,13 +67,15 @@ class Category extends Dto
     /**
      * @param null $orderKey
      * @param bool $ascending
+     * @param null $limit
+     * @param int $offset
      * @return array
      */
-    public function getArticles($orderKey = null, $ascending = true): array
+    public function getArticles($orderKey = null, $ascending = true, $limit = null, $offset = 0): array
     {
         if(!$this->articles)
             $this->articles = (\Bravo\Dao\Article::getInstance())
-                ->getBy("category_id", $this->id, false, $orderKey, $ascending);
+                ->getBy("category_id", $this->id, false, $orderKey, $ascending, $limit, $offset);
         return $this->articles;
     }
 

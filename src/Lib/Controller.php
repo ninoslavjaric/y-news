@@ -67,4 +67,8 @@ class Controller
         header("Content-type: {$this->response->getContentType()}");
         echo $this->response;
     }
+
+    public function redirect($url = "/four-o-four"){
+        header("Location: {$url}");
+    }
 }

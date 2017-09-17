@@ -16,7 +16,7 @@ use Bravo\Lib\Http\Response;
 class IndexController extends Controller
 {
     public function getIndex(){
-        $articles = Article::getInstance()->getAll('pub_date', false);
+        $articles = Article::getInstance()->getAll('pub_date', false, 6);
 
         return new Response([
             'title'     =>  "Latest news",

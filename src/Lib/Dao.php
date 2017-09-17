@@ -53,13 +53,20 @@ abstract class Dao
             self::$adapter = Config::get("dao.adapter")::getInstance();
         return self::$adapter;
     }
+
     /**
-     * @return Dto[]
+     * @param null $orderKey
+     * @param bool $direction
+     * @param null $limit
+     * @param int $offset
+     * @return array
      */
-    public function getAll($orderKey = null, $direction = true): array {
+    public function getAll($orderKey = null, $direction = true, $limit = null, $offset = 0): array {
         $storable = self::getAdapter()->select($this);
         if($orderKey)
             $storable = $storable->orderBy($orderKey, $direction);
+        if($limit)
+            $storable = $storable->limit($limit, $offset);
         return $storable->get();
     }
     /**
@@ -89,7 +96,7 @@ abstract class Dao
      * @param bool $direction
      * @return array
      */
-    public function getBy(string $column, $value, bool $like = false, $orderKey = null, $direction = true): array {
+    public function getBy(string $column, $value, bool $like = false, $orderKey = null, $direction = true, $limit = null, $offset = 0): array {
         $comparator = $like ? "LIKE" : "=";
         $value = $like ? "%{$value}%" : $value;
         $storable = self::getAdapter()
@@ -98,6 +105,8 @@ abstract class Dao
         ;
         if($orderKey)
             $storable = $storable->orderBy($orderKey, $direction);
+        if($limit)
+            $storable = $storable->limit($limit, $offset);
         return $storable->get();
     }
     /**

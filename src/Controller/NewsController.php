@@ -24,7 +24,7 @@ class NewsController extends Controller
         $category = Category::getInstance()->getOneBy('key', $key);
         /** @var \Bravo\Dto\Category $category */
         return new Response([
-            'articles'  =>  $category->getArticles("pub_date", false),
+            'articles'  =>  $category->getArticles("pub_date", false, 6),
             'title'     =>  $category->getTitle(),
         ]);
 
