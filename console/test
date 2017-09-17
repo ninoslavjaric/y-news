@@ -1,5 +1,10 @@
 <?php
 
-$test = '<p><a href="https://www.yahoo.com/news/rohingya-know-myanmars-deepening-crisis-174020009.html"><img src="" width="130" height="86" alt="Who are the Rohingya? What you should know about Myanmar&#39;s deepening crisis" align="left" title="Who are the Rohingya? What you should know about Myanmar&#39;s deepening crisis" border="0" ></a>Rohingya Muslims in Myanmar (Burma) have endured decades of persecution.  Some 370,000 Rohingya have fled to Bangladesh.  An estimated 1 million to 1.2 million live in Myanmarâ€™s western state of Rakhine, where they make up about a third of the population.<p><br clear="all">';
-$test = strip_tags($test);
-var_dump($test);
+require_once __DIR__."/../loaders/startup.php";
+$articles = \Bravo\Dao\Article::getInstance()->getAll();
+/** @var \Bravo\Dto\Article[] $articles */
+foreach ($articles as $article) {
+    $article->setDescription(html_entity_decode($article->getFullDescription(), ENT_QUOTES | ENT_HTML5));
+    \Bravo\Dao\Article::getInstance()->persist($article);
+}
+die;

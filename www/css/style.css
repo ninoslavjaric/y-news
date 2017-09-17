@@ -130,7 +130,8 @@ hr {
     min-height: 30px;
 }
 
-.main-content .panel-body h3 {
+.main-content .panel-body h3,
+.main-content .panel-body h3 a {
     color: #7b2e00;
     margin-bottom:25px;
 }
@@ -176,4 +177,37 @@ h1 {
 
 .main-content .article-card .panel-body img.img-responsive {
     width: 100%;
+}
+span.share-count {
+    background-color: white;
+    padding: 2px 5px;
+    position: relative;
+}
+
+span.share-count::before {
+    top: 20%;
+    background-color: transparent;
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    right: 100%;
+    border-width: 1px 16px 0px;
+    border-style: solid;
+    border-color: #ffffff transparent;
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid #ffffff;
+}
+a.btn.btn-default.btn-fb {
+    background: #4560af;
+    color: white;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-weight: bold;
+}
+.main-content .panel-heading span.pull-right>* {
+    margin: 0 1px;
 }

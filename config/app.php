@@ -7,4 +7,9 @@
  */
 return [
     'debug' =>  true,
+    '404'   =>  [
+        'controller'    =>  \Bravo\Controller\FourOFourController::class,
+        'method'        =>  "getIndex",
+    ],
+    'fbAppId'   =>  "136678420285291",
 ];

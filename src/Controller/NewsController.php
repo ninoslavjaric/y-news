@@ -44,4 +44,14 @@ class NewsController extends Controller
     public function getHealth(){
         return $this->pickData("health");
     }
+
+    public function getIndex(){
+        $query = $this->getRequest()->getParam("search");
+        $articles = Article::getInstance()->getBy('description', $query, true, 'pub_date', false, 6);
+        return new Response([
+            'articles'  =>  $articles,
+            'title'     =>  "Search results by \"{$query}\"",
+            'search'    =>  $query,
+        ]);
+    }
 }

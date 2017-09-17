@@ -118,7 +118,6 @@ class MySQL extends \mysqli implements Storable
      */
     public function get()
     {
-        $q = $this->query;
         if ($stmt = $this->prepare($this->query)) {
             $params = isset($this->cParams) ? $this->cParams : [];
             if($params){
@@ -175,7 +174,7 @@ class MySQL extends \mysqli implements Storable
             foreach ($fields as $key => &$field){
                 $this->typeGenerator($types, $field);
                 $columns[] = "`{$key}`=?";
-                $values[] = $field;
+                $values[] = html_entity_decode($field, ENT_QUOTES | ENT_HTML5);
             }
             $columns = implode(", ", $columns);
             $types .= "i";
@@ -191,7 +190,7 @@ class MySQL extends \mysqli implements Storable
                 $this->typeGenerator($types, $field);
                 $columns[] = "`{$key}`";
                 $questions[] = "?";
-                $values[] = $field;
+                $values[] = html_entity_decode($field, ENT_QUOTES | ENT_HTML5);
             }
             $columns = implode(", ", $columns);
             $questions = implode(", ", $questions);

@@ -9,6 +9,7 @@
 namespace Bravo\Lib;
 
 
+use Bravo\Controller\FourOFourController;
 use Bravo\Controller\IndexController;
 use Bravo\Lib\Controller\Container;
 use Bravo\Lib\Controller\ErrorController;
@@ -92,9 +93,16 @@ final class Arbeiter implements Instanceable
         set_exception_handler(function ($e){
             $content = date('l jS \of F Y h:i:s A')."\t{$e->getMessage()}\t{$e->getFile()}\t{$e->getLine()}\n";
             file_put_contents(PROJECT_ROOT."/logs/exceptions.log", $content, FILE_APPEND);
-            if(!Config::get("app.debug"))
-                die;
-            $container = new Container(new ErrorController, "getIndex", [$e]);
+            if(Config::get("app.debug")){
+                $container = new Container(new ErrorController, "getIndex", [$e]);
+            } else{
+                $class = Config::get("app.404.controller");
+                if(!$class)
+                    die("No 404 controller");
+                if(!($method = Config::get("app.404.method")))
+                    $method = "getIndex";
+                $container = new Container(new $class, $method, []);
+            }
             Arbeiter::getInstance()->setController($container
                 ->getController()
                 ->setRequest(Arbeiter::getInstance()->getRequest())

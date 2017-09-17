@@ -91,9 +91,11 @@ class Request
      * @param string $key
      * @return string
      */
-    public function getParam(string $key): string
+    public function getParam(string $key)
     {
-        return $this->params[$key];
+        if(isset($this->params[$key]))
+            return $this->params[$key];
+        return null;
     }
 
     /**
