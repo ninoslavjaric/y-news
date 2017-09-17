@@ -89,7 +89,7 @@ final class Arbeiter implements Instanceable
 
     private function initExceptionHandler(){
 
-        set_exception_handler(function (\Exception $e){
+        set_exception_handler(function ($e){
             $content = date('l jS \of F Y h:i:s A')."\t{$e->getMessage()}\t{$e->getFile()}\t{$e->getLine()}";
             file_put_contents(PROJECT_ROOT."/logs/exceptions.log", $content, FILE_APPEND);
             if(!Config::get("app.debug"))

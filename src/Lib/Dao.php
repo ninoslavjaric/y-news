@@ -92,7 +92,7 @@ abstract class Dao
         return self::getAdapter()
             ->select($this)
             ->where("`{$column}` {$comparator} ?", [$value])
-            ->get($class::$dtoType)
+            ->get()
         ;
     }
     /**
@@ -103,7 +103,7 @@ abstract class Dao
      */
     public function getOneBy(string $column, $value, bool $like = false) {
         if($result = $this->getBy($column, $value, $like))
-            current($result);
+            return current($result);
         return null;
     }
 

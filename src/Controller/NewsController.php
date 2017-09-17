@@ -16,36 +16,28 @@ use Bravo\Lib\Http\Response;
 
 class NewsController extends Controller
 {
+    /**
+     * @param $key
+     * @return \Bravo\Dto\Article[]
+     */
+    private function pickArticles($key){
+        $category = Category::getInstance()->getOneBy('key', $key);
+        return Article::getInstance()->getBy('category_id', $category->getId());
+
+    }
     public function getScience(){
-        $category = Category::getInstance()->getOneBy('key',"science");
-        $articles = Article::getInstance()->getBy('category_id', 2);
-        return new Response(['articles'=>$articles]);
+        return new Response(['articles'=>$this->pickArticles("science")]);
     }
     public function getTech(){
-        $category = Category::getInstance()->getOneBy('key',"tech");
-
-        $articles = Article::getInstance()->getBy('category_id', 2);
-
-        return new Response(['articles'=>$articles]);
+        return new Response(['articles'=>$this->pickArticles("tech")]);
     }
     public function getWorld(){
-
-        $category = Category::getInstance()->getOneBy('key',"world");
-        $articles = Article::getInstance()->getBy('category_id', $category->getKey());
-
-        return new Response(['articles'=>$articles]);
+        return new Response(['articles'=>$this->pickArticles("world")]);
     }
     public function getPolitics(){
-
-        $category = Category::getInstance()->getOneBy('key',"politics");
-        $articles = Article::getInstance()->getBy('category_id', 2);
-
-        return new Response(['articles'=>$articles]);
+        return new Response(['articles'=>$this->pickArticles("politics")]);
     }
     public function getHealth(){
-        $category = Category::getInstance()->getOneBy('key',"health");
-        $articles = Article::getInstance()->getBy('category_id', 2);
-
-        return new Response(['articles'=>$articles]);
+        return new Response(['articles'=>$this->pickArticles("health")]);
     }
 }
