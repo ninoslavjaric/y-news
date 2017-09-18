@@ -14,8 +14,7 @@
                          data-size="small"
                          data-show-faces="false"
                          data-share="true"
-                    >
-                    </div>
+                    ></div>
                 </span>
             </div>
             <div class="panel-body">
@@ -36,17 +35,22 @@
                     </div>
                     <div class="col-sm-6">
                         <p>
-                            <?=$article->getDescription()?>
+                            <?=$article->getTextDescription()?>
                         </p>
                     </div>
                 </div>
+            </div>
+            <div class="rating" data-article="<?=$article->getId()?>">
+                <?php for($i=1; $i<6; $i++): ?>
+                    <i class="fa fa-star-o fa-star" aria-hidden="true" data-rate="<?=$i?>"></i>
+                <?php endfor; ?>
             </div>
         </div>
     </div>
     <?php endforeach; ?>
 </div>
 <?php endforeach; ?>
-<?php if(isset($this->paginator)): ?>
+<?php if(false && isset($this->paginator)): ?>
 <div class="row">
     <div class="col-sm-12">
         <div class="btn-group" role="group" aria-label="...">
@@ -57,3 +61,7 @@
     </div>
 </div>
 <?php endif; ?>
+<?php if(isset($this->paginator)): ?>
+    <?=$this->paginator?>
+<?php endif; ?>
+

@@ -9,12 +9,13 @@
 namespace Bravo\Lib\Database;
 
 
+use Bravo\Lib\Arbeiter;
 use Bravo\Lib\Cache;
 use Bravo\Lib\Config;
-use Bravo\Lib\Contracts\Instanceable;
 use Bravo\Lib\Contracts\Storable;
 use Bravo\Lib\Dao;
 use Bravo\Lib\Dto;
+use Bravo\Lib\Tool\Stringer;
 
 /**
  * Class MySQL
@@ -46,9 +47,9 @@ class MySQL extends \mysqli implements Storable
     private $dao;
 
     /**
-     * @return Instanceable
+     * @return MySQL
      */
-    public static function getInstance(): Instanceable
+    public static function getInstance(): MySQL
     {
         if(!isset(self::$instance)){
             $params = Config::get("database.mysql");
@@ -175,7 +176,7 @@ class MySQL extends \mysqli implements Storable
             foreach ($fields as $key => &$field){
                 $this->typeGenerator($types, $field);
                 $columns[] = "`{$key}`=?";
-                $values[] = html_entity_decode($field, ENT_QUOTES | ENT_HTML5);
+                $values[] = Stringer::filterSpecChrs($field);
             }
             $columns = implode(", ", $columns);
             $types .= "i";
@@ -191,7 +192,7 @@ class MySQL extends \mysqli implements Storable
                 $this->typeGenerator($types, $field);
                 $columns[] = "`{$key}`";
                 $questions[] = "?";
-                $values[] = html_entity_decode($field, ENT_QUOTES | ENT_HTML5);
+                $values[] = Stringer::filterSpecChrs($field);
             }
             $columns = implode(", ", $columns);
             $questions = implode(", ", $questions);
@@ -199,8 +200,9 @@ class MySQL extends \mysqli implements Storable
         }
         if($id = $this->execute($this->query, $types, $values))
             $object->setId($id);
-
-        Cache::del(get_class($object).":id:{$object->getId()}");
+        Arbeiter::getInstance()
+            ->getEventContainer()
+            ->trigger("dtoReset", $object);
         return $object;
     }
 

@@ -1,10 +1,11 @@
 <?php
 
 require_once __DIR__."/../loaders/startup.php";
-$articles = \Bravo\Dao\Article::getInstance()->getAll();
-/** @var \Bravo\Dto\Article[] $articles */
-foreach ($articles as $article) {
-    $article->setDescription(html_entity_decode($article->getFullDescription(), ENT_QUOTES | ENT_HTML5));
-    \Bravo\Dao\Article::getInstance()->persist($article);
-}
-die;
+
+$ec = new \Bravo\Lib\Event\EventContainer;
+
+$ec->addEvent("djes", function ($a, $b, $c){
+    var_dump($a, $b);
+});
+
+$ec->trigger("djes", 1, 2, 4);

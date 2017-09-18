@@ -12,6 +12,7 @@ namespace Bravo\Controller;
 use Bravo\Dao\Article;
 use Bravo\Dao\Category;
 use Bravo\Lib\Controller;
+use Bravo\Lib\Http\JsonResponse;
 use Bravo\Lib\Http\Response;
 
 class NewsController extends Controller
@@ -24,10 +25,13 @@ class NewsController extends Controller
     private function pickData($key){
         $category = Category::getInstance()->getOneBy('key', $key);
         /** @var \Bravo\Dto\Category $category */
+        if(!($page = $this->getParam("page")))
+            $page = 1;
+        $limit = 6;
 
         return new Response([
-            'articles'  =>  $category->getArticles("pub_date", false, 6),
-            'paginator' =>  $this->getPaginator($category->getArticlesCount(), 6),
+            'articles'  =>  $category->getArticles("pub_date", false, $limit, ($limit*(--$page))),
+            'paginator' =>  $this->getPaginator($category->getArticlesCount(), $limit, "/news/{$key}"),
             'title'     =>  $category->getTitle(),
         ]);
 
@@ -51,12 +55,27 @@ class NewsController extends Controller
     public function getIndex(){
         if(!($query = $this->getRequest()->getParam("search")))
             $this->redirect();
-        $articles = Article::getInstance()->getBy('description', $query, true, 'pub_date', false, 6);
+        if(!($page = $this->getParam("page")))
+            $page = 1;
+        $limit = 6;
+        $articles = Article::getInstance()->getBy('description', $query, true, 'pub_date', false, 6, ($limit*(--$page)));
+        $count = Article::getInstance()
+            ->getCountBy('description', $query, true);
+
 
         return new Response([
             'articles'  =>  $articles,
-            'title'     =>  "Search results by \"{$query}\"",
+            'title'     =>  "Search by \"{$query}\"",
             'search'    =>  $query,
+            'paginator' =>  $this->getPaginator(Article::getInstance()
+                ->getCountBy('description', $query, true), $limit, "/news"),
+        ]);
+    }
+
+    public function putIndex(){
+
+        return new JsonResponse([
+            "test"  =>  "its ok",
         ]);
     }
 }

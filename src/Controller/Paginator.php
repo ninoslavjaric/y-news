@@ -9,41 +9,51 @@
 namespace Bravo\Controller;
 
 
+use Bravo\Lib\Pagination\Item;
+use Bravo\Lib\Pagination\Listing;
+
 trait Paginator
 {
+    /**
+     * @param int $amount
+     * @param int $limit
+     * @param string $url
+     * @return Listing
+     * @throws \Exception
+     */
     private function getPaginator(int $amount, int $limit, string $url = "/"){
         $total = ceil($amount/$limit);
         $params = $this->getRequest()->getParams();
         if(!isset($params['page']))
             $page = 1;
-        elseif (is_int($params['page']))
+        elseif (!($page = intval($params['page'])))
             $page = 1;
-        else
-            $page = intval($params['page']);
+        if($page < 1 || $page > $total)
+            throw new \Exception("Pagination number is out of bounds");
+
         $pages = [];
         for($i=0; $i<=$total; $i++){
             if($i == 0){
-                if($page-1)
-                    $params['page'] = $page-1;
-                $pages[] = (object)[
-                    'title' =>  "Previous",
-                    'url'   =>  "{$url}?".http_build_query($params),
-                ];
+                if(($params['page'] = $page-1)<1)
+                    $params['page'] = 1;
+                $disabled = $params['page'] <= 1;
+                $pages[] = new Item("❮ Previous", $disabled, false, $disabled ? "#" : "{$url}?".http_build_query($params));
+                if($page > 2)
+                    $pages[] = new Item("...", true, false, "#");
             }
             if($i<$total){
                 $params['page'] = $i+1;
-                $pages[] = (object)[
-                    'title' =>  $i+1,
-                    'url'   =>  "{$url}?".http_build_query($params),
-                ];
+                if($params['page'] >= $page-2 && $params['page'] <= $page+2){
+                    $pages[] = new Item($i+1, $page == $i+1, $page == $i+1, "{$url}?".http_build_query($params));
+                }
             } else {
+                if(abs($total - $page) > 2)
+                    $pages[] = new Item("...", true, false, "#");
                 $params['page'] = $page+1;
-                $pages[] = (object)[
-                    'title' =>  "next",
-                    'url'   =>  "{$url}?".http_build_query($params),
-                ];
+                $disabled = $page == $i;
+                $pages[] = new Item("Next ❯", $disabled, false, $disabled ? "#" : "{$url}?".http_build_query($params));
             }
         }
-        return $pages;
+        return new Listing($pages);
     }
 }

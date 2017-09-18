@@ -9,10 +9,9 @@
 namespace Bravo\Lib\Database;
 use Bravo\Lib\Config;
 use Bravo\Lib\Contracts\Cacheable;
-use Bravo\Lib\Contracts\Instanceable;
 use \Redis as RealRedis;
 
-class Redis extends RealRedis implements Instanceable, Cacheable
+class Redis extends RealRedis implements Cacheable
 {
     private static $params = [
         'host'  =>  "localhost",
@@ -24,9 +23,9 @@ class Redis extends RealRedis implements Instanceable, Cacheable
     private static $instance;
 
     /**
-     * @return Instanceable
+     * @return Redis
      */
-    public static function getInstance(): Instanceable
+    public static function getInstance(): Redis
     {
         if(!isset(self::$instance)){
             $params = Config::get("database.redis");

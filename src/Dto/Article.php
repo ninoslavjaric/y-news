@@ -91,15 +91,17 @@ class Article extends Dto
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getTextDescription(): string
     {
         return Stringer::filterDescription(strip_tags($this->description));
     }
 
-    public function getImage(){
-        if(preg_match('/<img[^>]+src="([^"]+)"[^>]+>/',$this->description, $matches))
-            return $matches[1];
-        return "/img/default.png";
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     /**
@@ -110,6 +112,12 @@ class Article extends Dto
     {
         $this->description = $description;
         return $this;
+    }
+
+    public function getImage(){
+        if(preg_match('/<img[^>]+src="([^"]+)"[^>]+>/',$this->description, $matches))
+            return $matches[1];
+        return "/img/default.png";
     }
 
     /**

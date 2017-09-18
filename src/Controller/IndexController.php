@@ -17,11 +17,14 @@ class IndexController extends Controller
 {
     use Paginator;
     public function getIndex(){
-        $articles = Article::getInstance()->getAll('pub_date', false, 6);
+        if(!($page = $this->getParam("page")))
+            $page = 1;
+        $limit = 6;
+        $articles = Article::getInstance()->getAll('pub_date', false, $limit, ($limit*(--$page)));
         return new Response([
             'title'     =>  "Latest news",
             'articles'  =>  $articles,
-            'paginator' =>  $this->getPaginator(Article::getInstance()->getCountAll(), 6),
+            'paginator' =>  $this->getPaginator(Article::getInstance()->getCountAll(), $limit),
         ]);
     }
 }

@@ -17,9 +17,12 @@ class EventContainer
     private static $events = [];
 
     public function trigger(string $event, $object = null){
-        $params = func_get_args();
-        array_shift($params);
-        call_user_func_array(self::$events[$event], $params);
+        $params = array_slice(func_get_args(),1);
+        if(isset(self::$events[$event])){
+            call_user_func_array(self::$events[$event], $params);
+            return true;
+        }
+        return false;
     }
     public function addEvent(string $key, \Closure $callback){
         self::$events[$key] = $callback;

@@ -12,7 +12,7 @@ namespace Bravo\Lib\Contracts;
 use Bravo\Lib\Dao;
 use Bravo\Lib\Dto;
 
-interface Storable extends Instanceable
+interface Storable
 {
 
     /**

@@ -9,16 +9,12 @@
 namespace Bravo\Lib;
 
 
-use Bravo\Controller\FourOFourController;
-use Bravo\Controller\IndexController;
 use Bravo\Lib\Controller\Container;
 use Bravo\Lib\Controller\ErrorController;
-use Bravo\Lib\Contracts\Instanceable;
 use Bravo\Lib\Event\EventContainer;
 use Bravo\Lib\Http\Request;
-use Exception;
 
-final class Arbeiter implements Instanceable
+final class Arbeiter
 {
     /**
      * @var EventContainer
@@ -68,12 +64,12 @@ final class Arbeiter implements Instanceable
     }
 
     /**
-     * @return Instanceable
+     * @return Arbeiter
      */
-    public static function getInstance(): Instanceable{
+    public static function getInstance(): Arbeiter{
         if(!isset(self::$instance))
-            self::$instance = new static;
-        return self::$instance;
+            static::$instance = new static;
+        return static::$instance;
     }
 
     public static function init(){
@@ -113,11 +109,17 @@ final class Arbeiter implements Instanceable
     }
 
     private function initEventContainer(){
-        $this->eventContainer = new EventContainer;
+        $eventContainer = new EventContainer;
+        if($events = Config::get("cache.events"))
+            foreach ($events as $key => $event)
+                $eventContainer->addEvent($key, $event);
+        $this->eventContainer = $eventContainer;
         return $this;
     }
 
     public function getEventContainer():EventContainer{
+        if(!isset($this->eventContainer))
+            self::initEventContainer();
         return $this->eventContainer;
     }
 

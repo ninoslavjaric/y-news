@@ -33,6 +33,7 @@ class Response
      */
     public function __construct(array $content, string $view = "index/index")
     {
+        header("Content-type: {$this->contentType}");
         $this->content = $content;
         $this->view = $view;
     }

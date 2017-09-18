@@ -39,4 +39,13 @@ $(function(){
         };
         location = url + "?" + $.serializeObject(data);
     });
+    $("[data-article]").mouseleave(function (event) {
+            $(">i",this).addClass("fa-star-o").siblings().addClass("fa-star-o");
+    }).find("i").mouseenter(function (event) {
+        $(this).prevAll().removeClass("fa-star-o");
+        $(this).removeClass("fa-star-o");
+        $(this).nextAll().addClass("fa-star-o");
+    }).click(function (event) {
+        console.log(event);
+    });
 });

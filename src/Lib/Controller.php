@@ -71,4 +71,8 @@ class Controller
     public function redirect($url = "/four-o-four"){
         header("Location: {$url}");
     }
+
+    protected function getParam(string $key){
+        return $this->getRequest()->getParam($key);
+    }
 }

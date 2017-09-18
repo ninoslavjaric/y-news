@@ -31,4 +31,15 @@ class Stringer
         }
         return $string;
     }
+
+    public static function filterSpecChrs(string $string){
+        $disputeds = [
+            '&lt;', '&gt;', '&amp;', '&quot;', '&apos;', '&cent;', '&pound;', '&yen;', '&euro;', '&copy;', '&reg;', '&#60;', '&#62;', '&#38;', '&#34;', '&#39;', '&#162;', '&#163;', '&#165;', '&#8364;', '&#169;', '&#174;',
+        ];
+        $replacements = [
+            "<", ">", "&", "\"", "'", "¢", "£", "¥", "€", "©", "®", "<", ">", "&", "\"", "'", "¢", "£", "¥", "€", "©", "®",
+        ];
+        return str_replace($disputeds, $replacements, $string);
+    }
+
 }

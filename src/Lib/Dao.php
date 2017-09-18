@@ -9,7 +9,6 @@
 namespace Bravo\Lib;
 
 
-use Bravo\Lib\Contracts\Instanceable;
 use Bravo\Lib\Contracts\Storable;
 use Bravo\Lib\Traits\ContainerBehaviour;
 
@@ -31,7 +30,7 @@ abstract class Dao
     public static $table;
 
     /**
-     * @var Instanceable
+     * @var Storable
      */
     private static $adapter;
 
