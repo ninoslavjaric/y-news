@@ -48,6 +48,8 @@ class Controller
      */
     public function setResponse(Response $response)
     {
+        if(isset($this->request))
+            $response->setRequest($this->request);
         $this->response = $response;
         return $this;
     }

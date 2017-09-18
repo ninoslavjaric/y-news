@@ -23,13 +23,13 @@
                         </div>
                         <div class="col-md-8">
                             <div class="btn-group btn-group-justified menu menu-margin-top" role="group" aria-label="...">
-                                <div class="btn-group" role="group"><a class="btn btn-default" href="/">Home</a></div>
-                                <div class="btn-group" role="group"><a class="btn btn-default" href="/news/science">Science</a></div>
-                                <div class="btn-group" role="group"><a class="btn btn-default" href="/news/tech">Tech</a></div>
-                                <div class="btn-group" role="group"><a class="btn btn-default" href="/news/world">World</a></div>
-                                <div class="btn-group" role="group"><a class="btn btn-default" href="/news/politics">Politics</a></div>
-                                <div class="btn-group" role="group"><a class="btn btn-default" href="/news/health">Health</a></div>
-                                <div class="btn-group" role="group"><a class="btn btn-default" href="/contact">Contact</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default <?php if($this->getUrl() == "/"): ?>active<?php endif; ?>" href="/">Home</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default <?php if($this->getUrl() == "/news/science"): ?>active<?php endif; ?>" href="/news/science">Science</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default <?php if($this->getUrl() == "/news/tech"): ?>active<?php endif; ?>" href="/news/tech">Tech</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default <?php if($this->getUrl() == "/news/world"): ?>active<?php endif; ?>" href="/news/world">World</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default <?php if($this->getUrl() == "/news/politics"): ?>active<?php endif; ?>" href="/news/politics">Politics</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default <?php if($this->getUrl() == "/news/health"): ?>active<?php endif; ?>" href="/news/health">Health</a></div>
+                                <div class="btn-group" role="group"><a class="btn btn-default <?php if($this->getUrl() == "/contact"): ?>active<?php endif; ?>" href="/contact">Contact</a></div>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -74,9 +74,9 @@
                         Copyleft &copy; 2016 <strong>Y-news</strong>. All lefts Reserved
                     </p>
                     <ul class="nav navbar-nav pull-right">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/about">About us</a></li>
-                        <li><a href="/contact">Contact</a></li>
+                        <li <?php if($this->getUrl() == "/"): ?>class="active"<?php endif; ?> ><a href="/">Home</a></li>
+                        <li <?php if($this->getUrl() == "/about"): ?>class="active"<?php endif; ?>><a href="/about">About us</a></li>
+                        <li <?php if($this->getUrl() == "/contact"): ?>class="active"<?php endif; ?>><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
             </div>

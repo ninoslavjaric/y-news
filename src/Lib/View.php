@@ -9,10 +9,16 @@
 namespace Bravo\Lib;
 
 
+use Bravo\Lib\Http\Response;
+
 class View
 {
     private $layout = PROJECT_ROOT."/view/layout.phtml";
     private $view;
+    /**
+     * @var Response
+     */
+    private $response;
 
     /**
      * View constructor.
@@ -72,5 +78,26 @@ class View
         $content = ob_get_contents();
         ob_end_clean();
         return $content;
+    }
+
+    /**
+     * @param Response $response
+     * @return $this
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
+        return $this;
+    }
+
+    /**
+     * @return Http\Request
+     */
+    public function getRequest(){
+        return $this->response->getRequest();
+    }
+
+    public function getUrl(){
+        return $this->getRequest()->getPath();
     }
 }

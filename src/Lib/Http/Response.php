@@ -9,10 +9,14 @@
 namespace Bravo\Lib\Http;
 
 
+use Bravo\Lib\Arbeiter;
+use Bravo\Lib\Config;
+use Bravo\Lib\Traits\Navigator;
 use Bravo\Lib\View;
 
 class Response
 {
+    use Navigator;
     /**
      * @var string
      */
@@ -29,6 +33,10 @@ class Response
      * @var string
      */
     protected $view;
+    /**
+     * @var Request
+     */
+    private $request;
 
     /**
      * Response constructor.
@@ -67,7 +75,7 @@ class Response
 
     public function __toString()
     {
-        return (new View($this->view, $this->content))->spitLayout();
+        return (new View($this->view, $this->content))->setResponse($this)->spitLayout();
     }
 
     /**
@@ -76,6 +84,19 @@ class Response
     public function getContentType(): string
     {
         return $this->contentType;
+    }
+
+    public function setRequest(Request $request)
+    {
+        if($navigations = Config::get('app.navigation'))
+            $this->content = array_merge($this->content, $this->getNavigations($navigations, $request->getPath()));
+        $this->request = $request;
+        return $this;
+    }
+
+    public function getRequest()
+    {
+        return $this->request;
     }
 
 

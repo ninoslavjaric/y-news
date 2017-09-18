@@ -11,5 +11,21 @@ return [
         'controller'    =>  \Bravo\Controller\FourOFourController::class,
         'method'        =>  "getIndex",
     ],
+    'navigation'    =>  [
+        'main'  =>  [
+            ['title' =>  "Home", 'href' =>  "/"],
+            ['title' =>  "Science", 'href' =>  "/news/science"],
+            ['title' =>  "Tech", 'href' =>  "/news/tech"],
+            ['title' =>  "World", 'href' =>  "/news/world"],
+            ['title' =>  "Politics", 'href' =>  "/news/politics"],
+            ['title' =>  "Health", 'href' =>  "/news/health"],
+            ['title' =>  "Contact", 'href' =>  "/contact"],
+        ],
+        'footer'    =>  [
+            ['title' =>  "Home", 'href' =>  "/"],
+            ['title' =>  "", 'href' =>  "/about"],
+            ['title' =>  "Contact", 'href' =>  "/contact"],
+        ],
+    ],
     'fbAppId'   =>  "136678420285291",
 ];
