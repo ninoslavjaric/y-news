@@ -15,9 +15,9 @@ use Bravo\Lib\Navigation\Listing;
 trait Navigator
 {
     /**
-     * @param Listing[] $data
+     * @param array $data
      * @param string $url
-     * @return array
+     * @return Listing[]
      */
     private function getNavigations(array $data, string $url){
         foreach ($data as $key => &$items){
@@ -26,6 +26,6 @@ trait Navigator
             $items = new Listing($items);
             $items->setKey($key);
         }
-        return $items;
+        return $data;
     }
 }

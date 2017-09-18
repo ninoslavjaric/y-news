@@ -34,6 +34,9 @@
                         </a>
                     </div>
                     <div class="col-sm-6">
+                        <div class="rate-wrapper">
+                            <div class="rate" data-article="<?=$article->getId()?>" style="width: <?=100*$article->getRating()/5?>%;"></div>
+                        </div>
                         <p>
                             <?=$article->getTextDescription()?>
                         </p>

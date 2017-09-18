@@ -198,14 +198,18 @@ class Article extends Dto
     }
 
     /**
-     * @return mixed
+     * @param bool $forse
+     * @return float
      */
-    public function getRating()
+    public function getRating($forse = false)
     {
-        if(!isset($this->rating)){
+        if(!isset($this->rating) || $forse){
             /** @var Rate $rateDao */
             $rateDao = Rate::getInstance();
+            if($forse)
+                $rateDao->resetAvgByArticle($this);
             $this->rating = $rateDao->getAvgByArticle($this);
+            $this->rating = $this->rating ? $this->rating : 0.00;
         }
         return $this->rating;
     }

@@ -24,4 +24,9 @@ class JsonResponse extends Response
     {
         return json_encode($this->content);
     }
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
 }

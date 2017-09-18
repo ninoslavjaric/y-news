@@ -52,7 +52,9 @@ $(function(){
             },
             function (response) {
                 if(response.ok){
-                    $("[data-article="+response.article+"]").hide();
+                    alert(response.message);
+                    $(".rating[data-article="+response.article+"]").hide();
+                    $(".rate[data-article="+response.article+"]").css("width", (100*response.rating/5)+"%")
                 }
             });
     });

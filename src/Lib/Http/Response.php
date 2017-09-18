@@ -36,7 +36,7 @@ class Response
     /**
      * @var Request
      */
-    private $request;
+    protected $request;
 
     /**
      * Response constructor.

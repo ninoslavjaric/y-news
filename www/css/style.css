@@ -251,6 +251,18 @@ ul.pagination {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes blinking {
+    0%   {opacity: 1;}
+    50%  {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes blinking {
+    0%   {opacity: 1;}
+    50%  {opacity: 0;}
+    100% {opacity: 1;}
+}
 .rating {
     width: 0;
     height: 0;
@@ -261,6 +273,8 @@ ul.pagination {
     bottom: 0;
     right: 0;
     text-align: center;
+    -webkit-animation: blinking 3s infinite; /* Safari 4.0 - 8.0 */
+    animation: blinking 3s infinite;
 }
 
 .rating:hover {
@@ -270,6 +284,8 @@ ul.pagination {
     border-top: initial;
     border-bottom: initial;
     border-right: initial;
+    -webkit-animation: initial; /* Safari 4.0 - 8.0 */
+    animation: initial;
 }
 
 .rating>* {
@@ -282,5 +298,39 @@ ul.pagination {
 }
 
 .article-card {
+    position: relative;
+}
+.rate:before {
+    font-family: 'FontAwesome';
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '\f005 \f005 \f005 \f005 \f005';
+    letter-spacing: 5px;
+    color: rgba(218, 218, 218, .8);
+    color: #7d2e00;
+}
+
+.rate {
+    height: 20px;
+    width: 0%;
+    position: relative;
+    overflow: hidden;
+}
+
+.rate-wrapper:before {
+    font-family: 'FontAwesome';
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '\f005 \f005 \f005 \f005 \f005';
+    letter-spacing: 5px;
+    color: rgba(218, 218, 218, .8);
+    color: #d5c68a;
+}
+
+.rate-wrapper {
+    height: 20px;
+    width: 85px;
     position: relative;
 }

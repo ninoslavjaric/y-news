@@ -145,7 +145,9 @@ abstract class Dao
             ->select($this)
             ->where("`{$column}` {$comparator} ?", [$value])
         ;
-        return $storable->avg($field);
+        if($avg = $storable->avg($field))
+            return $avg;
+        return 0;
     }
     /**
      * @param string $column

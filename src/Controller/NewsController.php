@@ -91,6 +91,8 @@ class NewsController extends Controller
             return new JsonResponse([
                 'ok'        =>  true,
                 'article'   =>  $article->getId(),
+                'message'   =>  "Article {$article->getId()} successfully rated.",
+                'rating'    =>  $article->getRating(true),
             ]);
         }catch (\Exception $exception){
             return new JsonResponse([

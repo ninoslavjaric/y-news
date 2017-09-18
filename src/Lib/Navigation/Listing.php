@@ -44,7 +44,9 @@ class Listing extends \ArrayIterator
     public function __toString()
     {
         $content = "";
+        /** @var Item $item */
         foreach ($this as $item){
+            $item->setKey($this->key);
             $content .= $item;
         }
         return str_replace("{content}", $content, $this->getPattern());

@@ -23,7 +23,7 @@ return [
         ],
         'footer'    =>  [
             ['title' =>  "Home", 'href' =>  "/"],
-            ['title' =>  "", 'href' =>  "/about"],
+            ['title' =>  "About us", 'href' =>  "/about"],
             ['title' =>  "Contact", 'href' =>  "/contact"],
         ],
     ],
