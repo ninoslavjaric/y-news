@@ -9,9 +9,11 @@
 namespace Bravo\Controller;
 
 
+use Bravo\Lib\Config;
 use Bravo\Lib\Controller;
 use Bravo\Lib\Http\JsonResponse;
 use Bravo\Lib\Http\Response;
+use Bravo\Lib\Mailer;
 use Bravo\Lib\Session;
 
 class ContactController extends Controller
@@ -23,13 +25,22 @@ class ContactController extends Controller
     public function postIndex(){
         if("/contact" != str_replace($this->request->getOrigin(), "", $this->request->getReferer()))
             throw new \Exception("Wrong referer");
-        $this->validate($this->request->getParams(), [
+        if($this->validate($this->request->getParams(), [
             'email' =>  "email",
             'first-name'    =>  "max:15|min:3",
             'last-name'     =>  "max:15|min:3",
             'subject'       =>  "max:15|min:5",
             'body'          =>  "min:15|max:1000",
-        ]);
+        ]))
+            return $this->redirect("/contact");
+
+        $mailer = new Mailer(
+            $this->getParam("email"),
+            Config::get("app.contact-email"),
+            $this->getParam("subject"),
+            $this->getParam("body")
+        );
+        $mailer->send();
         return $this->redirect("/contact");
     }
 }
