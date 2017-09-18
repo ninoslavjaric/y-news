@@ -18,8 +18,7 @@ class IndexController extends Controller
     use Paginator;
     public function getIndex(){
         $articles = Article::getInstance()->getAll('pub_date', false, 6);
-        $counter = Article::getInstance()->getCountAll();
-
+        $paginator = $this->getPaginator(Article::getInstance()->getCountAll(), 6);
         return new Response([
             'title'     =>  "Latest news",
             'articles'  =>  $articles
