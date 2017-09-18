@@ -160,6 +160,12 @@ h1 {
         width: 970px;
     }
 }
+
+@media (max-width: 500px) {
+    .btn-group-justified>.btn-group .btn {
+        font-size: 10px;
+    }
+}
 .main-content .article-card .panel-body p {
     margin-bottom: 0px;
 }
