@@ -7,33 +7,15 @@
             <div class="panel-heading">
                 <?=$article->getPubDate()->format("D, d M Y H:i:s")?>
                 <span class="pull-right">
-<!--                    <div class="fb-like"-->
-<!--                         data-href="<?= $article->getLink() ?>"-->
-<!--                         data-layout="button_count"-->
-<!--                         data-action="like"-->
-<!--                         data-size="small"-->
-<!--                         data-show-faces="false"-->
-<!--                         data-share="true"-->
-<!--                    >-->
-<!--                    </div>-->
-
-<!--                    <div class="fb-share-button"-->
-<!--                         data-href="<?= $article->getLink() ?>"-->
-<!--                         data-layout="box_count"-->
-<!--                         data-size="small"-->
-<!--                         data-mobile-iframe="true">-->
-<!--                        <a class="fb-xfbml-parse-ignore"-->
-<!--                           target="_blank"-->
-<!--                           href="https://www.facebook.com/sharer/sharer.php?u=<?= $article->getLink() ?>&amp;src=sdkpreparse">Share</a>-->
-<!--                    </div>-->
-                    <a href="#" class="btn btn-default btn-fb btn-xs">
-                        <i class="fa fa-facebook-official" aria-hidden="true"></i>
-                        Like
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $article->getLink() ?>" class="btn btn-default btn-fb btn-xs share-button">
-                        Share
-                    </a>
-                    <span data-url="<?= $article->getLink() ?>" class="share-count"></span>
+                    <div class="fb-like"
+                         data-href="<?= $article->getLink() ?>"
+                         data-layout="button_count"
+                         data-action="like"
+                         data-size="small"
+                         data-show-faces="false"
+                         data-share="true"
+                    >
+                    </div>
                 </span>
             </div>
             <div class="panel-body">

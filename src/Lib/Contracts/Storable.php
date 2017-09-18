@@ -49,6 +49,11 @@ interface Storable extends Instanceable
     public function get();
 
     /**
+     * @return int
+     */
+    public function count();
+
+    /**
      * @param Dto $object
      * @return $object
      */

@@ -16,6 +16,7 @@ use Bravo\Lib\Http\Response;
 
 class NewsController extends Controller
 {
+    use Paginator;
     /**
      * @param $key
      * @return Response
@@ -46,8 +47,10 @@ class NewsController extends Controller
     }
 
     public function getIndex(){
-        $query = $this->getRequest()->getParam("search");
+        if(!($query = $this->getRequest()->getParam("search")))
+            $this->redirect();
         $articles = Article::getInstance()->getBy('description', $query, true, 'pub_date', false, 6);
+
         return new Response([
             'articles'  =>  $articles,
             'title'     =>  "Search results by \"{$query}\"",

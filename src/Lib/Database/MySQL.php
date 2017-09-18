@@ -72,7 +72,7 @@ class MySQL extends \mysqli implements Storable
     public function select(Dao $dao): Storable
     {
         $this->dao = $dao;
-        $this->query = "SELECT `id` FROM `{$dao->getTable()}`";
+        $this->query = "SELECT {coulumns} FROM `{$dao->getTable()}`";
         return $this;
     }
 
@@ -118,6 +118,7 @@ class MySQL extends \mysqli implements Storable
      */
     public function get()
     {
+        $this->query = str_replace("{coulumns}", "`id`", $this->query);
         if ($stmt = $this->prepare($this->query)) {
             $params = isset($this->cParams) ? $this->cParams : [];
             if($params){
@@ -293,5 +294,19 @@ class MySQL extends \mysqli implements Storable
             $param = $param->getTimestamp();
             $types .= "i";
         }
+    }
+
+    /**
+     * @return int
+     * @throws \Exception
+     */
+    public function count()
+    {
+        $this->query = str_replace("{coulumns}", "COUNT(*) as `count`", $this->query);
+        if($res = $this->query($this->query)){
+            $counter = $res->fetch_object();
+            return $counter->count;
+        }
+        throw new \Exception("No counter columnt.");
     }
 }

@@ -32,7 +32,6 @@ $(function(){
             $(".navbar-y").removeClass("fixed");
         }
     });
-
     $(".main-content .article-card .panel-body p").dblclick(function(){
         var url = "/news";
         var data = {
@@ -40,17 +39,4 @@ $(function(){
         };
         location = url + "?" + $.serializeObject(data);
     });
-
-    $(".share-count").each(function(){
-        var url = "http://graph.facebook.com/?fields=share&id={url}";
-        $.get(url.replace("{url}", $(this).data("url")),function(response){
-            $("[data-url*='"+response.id+"']").html(response.share.share_count);
-        });
-    });
-
-    $(".share-button").click(function (event) {
-        event.preventDefault();
-        djes = window.open($(this).attr("href"), "", "width=200,height=100");
-    });
 });
-var djes;

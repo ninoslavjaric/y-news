@@ -15,8 +15,10 @@ use Bravo\Lib\Http\Response;
 
 class IndexController extends Controller
 {
+    use Paginator;
     public function getIndex(){
         $articles = Article::getInstance()->getAll('pub_date', false, 6);
+        $counter = Article::getInstance()->getCountAll();
 
         return new Response([
             'title'     =>  "Latest news",

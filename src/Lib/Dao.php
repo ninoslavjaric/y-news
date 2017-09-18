@@ -69,6 +69,15 @@ abstract class Dao
             $storable = $storable->limit($limit, $offset);
         return $storable->get();
     }
+
+    /**
+     * @return int
+     */
+    public function getCountAll(): int {
+        return self::getAdapter()
+            ->select($this)
+            ->count();
+    }
     /**
      * @param int $id
      * @return Dto
@@ -108,6 +117,24 @@ abstract class Dao
         if($limit)
             $storable = $storable->limit($limit, $offset);
         return $storable->get();
+    }
+
+    /**
+     * @param string $column
+     * @param $value
+     * @param bool $like
+     * @return int
+     * @internal param null|string $orderKey
+     * @internal param bool $direction
+     */
+    public function getCountBy(string $column, $value, bool $like = false): int {
+        $comparator = $like ? "LIKE" : "=";
+        $value = $like ? "%{$value}%" : $value;
+        $storable = self::getAdapter()
+            ->select($this)
+            ->where("`{$column}` {$comparator} ?", [$value])
+        ;
+        return $storable->count();
     }
     /**
      * @param string $column
