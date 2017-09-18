@@ -32,6 +32,14 @@ class Controller
         return $this->request;
     }
 
+    protected function isAjax(){
+        $headers = $this->request->getHeaders();
+        if(isset($headers['X-Requested-With']))
+            if($headers['X-Requested-With'] == "XMLHttpRequest")
+                return true;
+        return false;
+    }
+
     /**
      * @param Request $request
      * @return $this

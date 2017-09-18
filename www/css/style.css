@@ -334,3 +334,38 @@ ul.pagination {
     width: 85px;
     position: relative;
 }
+.bravo-tooltip{
+    position: absolute;
+    min-width: 100px;
+    min-height: 100px;
+    background: rgb(213, 198, 138);
+    border: thin solid rgb(123, 46, 7);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 12px 25px;
+}
+
+.bravo-tooltip a {
+    font-size: 12px;
+}
+
+.bravo-tooltip .glyphicon-remove:hover {
+    background-color: rgb(213, 198, 138);
+    color: rgb(123, 46, 7);
+    opacity: 1;
+}
+.bravo-tooltip .glyphicon-remove {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    background-color: rgb(123, 46, 7);
+    color: rgb(213, 198, 138);
+    padding: 2px;
+    opacity: .1;
+    cursor: pointer;
+    -webkit-transition: color .2s, background-color .2s, opacity .2s;
+    -moz-transition: color .2s, background-color .2s, opacity .2s;
+    -ms-transition: color .2s, background-color .2s, opacity .2s;
+    -o-transition: color .2s, background-color .2s, opacity .2s;
+    transition: color .2s, background-color .2s, opacity .2s;
+}

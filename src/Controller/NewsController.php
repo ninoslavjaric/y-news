@@ -60,15 +60,31 @@ class NewsController extends Controller
         if(!($page = $this->getParam("page")))
             $page = 1;
         $limit = 6;
+        /** @var \Bravo\Dto\Article[] $articles */
         $articles = Article::getInstance()->getBy('description', $query, true, 'pub_date', false, 6, ($limit*(--$page)));
         $count = Article::getInstance()
             ->getCountBy('description', $query, true);
 
+        if($this->isAjax()){
+            $arts = [];
+            foreach ($articles as $article)
+                $arts[] = [
+                    'title' =>  $article->getTitle(),
+                    'href'  =>  $article->getLink(),
+                ];
+            $data = [
+                'x' =>  intval($this->getParam("x")),
+                'y' =>  intval($this->getParam("y")),
+                'articles'  =>  $arts,
+            ];
+            return new JsonResponse($data);
+        }
 
         return new Response([
             'articles'  =>  $articles,
             'title'     =>  "Search by \"{$query}\"",
             'search'    =>  $query,
+            'totalResult'   =>  $count,
             'paginator' =>  $this->getPaginator(Article::getInstance()
                 ->getCountBy('description', $query, true), $limit, "/news"),
         ]);
