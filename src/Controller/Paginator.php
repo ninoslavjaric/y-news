@@ -23,6 +23,8 @@ trait Paginator
      */
     private function getPaginator(int $amount, int $limit, string $url = "/"){
         $total = ceil($amount/$limit);
+        if(!$total)
+            return new Listing([]);
         $params = $this->getRequest()->getParams();
         if(!isset($params['page']))
             $page = 1;
