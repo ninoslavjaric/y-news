@@ -32,6 +32,34 @@ class Request
      * @var string
      */
     private $path;
+    /**
+     * @var string
+     */
+    private $host;
+    /**
+     * @var string
+     */
+    private $referer;
+
+    /**
+     * @return string
+     */
+    public function getHost(): string
+    {
+        if(isset($_SERVER['HTTP_HOST']))
+            $this->host = $_SERVER['HTTP_HOST'];
+        return $this->host;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReferer(): string
+    {
+        if(isset($_SERVER['HTTP_REFERER']))
+            $this->referer = $_SERVER['HTTP_REFERER'];
+        return $this->referer;
+    }
 
     /**
      * @return array

@@ -4,41 +4,43 @@
             <div class="panel-heading"></div>
             <div class="panel-body">
                 <h3>If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.</h3>
-                <div class="row">
-                    <label for="first-name" class="col-sm-2 control-label">First name</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="first-name" name="first-name" type="text" placeholder="ex. Ninoslav">
+                <form action="/contact" method="post">
+                    <div class="row">
+                        <label for="first-name" class="col-sm-2 control-label">First name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="first-name" name="first-name" type="text" placeholder="ex. Ninoslav">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <label for="last-name" class="col-sm-2 control-label">Last name</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="last-name" name="last-name" type="text" placeholder="ex. Jaric">
+                    <div class="row">
+                        <label for="last-name" class="col-sm-2 control-label">Last name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="last-name" name="last-name" type="text" placeholder="ex. Jaric">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <label for="email" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="email" name="email" type="email" placeholder="ex. ninoslav@jaric.online">
+                    <div class="row">
+                        <label for="email" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="email" name="email" type="email" placeholder="ex. ninoslav@jaric.online">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <label for="subject" class="col-sm-2 control-label">Subject</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="subject" name="subject" type="text" placeholder="ex. Question about nothing">
+                    <div class="row">
+                        <label for="subject" class="col-sm-2 control-label">Subject</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="subject" name="subject" type="text" placeholder="ex. Question about nothing">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <label for="body" class="col-sm-2 control-label">Body</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" rows="5" id="body" name="body" placeholder="***" style="max-width: 100%;"></textarea>
+                    <div class="row">
+                        <label for="body" class="col-sm-2 control-label">Body</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="5" id="body" name="body" placeholder="***" style="max-width: 100%;"></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2 col-sm-offset-10">
-                        <button class="btn btn-default btn-md btn-block">Submit</button>
+                    <div class="row">
+                        <div class="col-sm-2 col-sm-offset-10">
+                            <button class="btn btn-default btn-md btn-block">Submit</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

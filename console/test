@@ -2,10 +2,5 @@
 
 require_once __DIR__."/../loaders/startup.php";
 
-$ec = new \Bravo\Lib\Event\EventContainer;
-
-$ec->addEvent("djes", function ($a, $b, $c){
-    var_dump($a, $b);
-});
-
-$ec->trigger("djes", 1, 2, 4);
+$e = mail('nino@bravo-test.com', 'My Subject', "tester");
+die;
