@@ -46,3 +46,14 @@
     <?php endforeach; ?>
 </div>
 <?php endforeach; ?>
+<?php if(isset($this->paginator)): ?>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="btn-group" role="group" aria-label="...">
+            <?php foreach($this->paginator as $page): ?>
+            <a href="<?=$page->url?>" type="button" class="btn btn-default"><?=$page->title?></a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

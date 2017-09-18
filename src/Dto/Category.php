@@ -80,6 +80,15 @@ class Category extends Dto
     }
 
     /**
+     * @return int
+     */
+    public function getArticlesCount(): int
+    {
+        return \Bravo\Dao\Article::getInstance()
+                ->getCountBy("category_id", $this->id);
+    }
+
+    /**
      * @param Article[] $articles
      * @return Category
      */

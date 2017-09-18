@@ -24,8 +24,10 @@ class NewsController extends Controller
     private function pickData($key){
         $category = Category::getInstance()->getOneBy('key', $key);
         /** @var \Bravo\Dto\Category $category */
+
         return new Response([
             'articles'  =>  $category->getArticles("pub_date", false, 6),
+            'paginator' =>  $this->getPaginator($category->getArticlesCount(), 6),
             'title'     =>  $category->getTitle(),
         ]);
 

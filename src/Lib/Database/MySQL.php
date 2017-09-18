@@ -303,10 +303,25 @@ class MySQL extends \mysqli implements Storable
     public function count()
     {
         $this->query = str_replace("{coulumns}", "COUNT(*) as `count`", $this->query);
-        if($res = $this->query($this->query)){
-            $counter = $res->fetch_object();
+        if ($stmt = $this->prepare($this->query)) {
+            $params = isset($this->cParams) ? $this->cParams : [];
+            if($params){
+                $types = "";
+                foreach ($params as $key => &$param)
+                $this->typeGenerator($types, $param);
+                $bindParams = array_merge([$types], $params);
+                if (!call_user_func_array([$stmt, "bind_param"], $bindParams))
+                throw new \Exception("Binding parameters failed: ({$stmt->errno}) {$stmt->error}");
+            }
+            if (!$stmt->execute())
+            throw new \Exception("Execute failed: ({$stmt->errno}) {$stmt->error}");
+            $result = $stmt->get_result();
+            /** @var Dto $dtos */
+            $counter = $result->fetch_object();
+            $stmt->close();
+
             return $counter->count;
         }
-        throw new \Exception("No counter columnt.");
+        throw new \Exception($this->error);
     }
 }
