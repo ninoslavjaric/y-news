@@ -69,3 +69,8 @@ server {
 	CustomLog /pathToProject/logs/apache_access.log combined
 </VirtualHost>
 ```
+
+# TODO #
+- Pagination
+- Mailing
+- Rating
