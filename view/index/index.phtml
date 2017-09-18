@@ -40,11 +40,13 @@
                     </div>
                 </div>
             </div>
-            <div class="rating" data-article="<?=$article->getId()?>">
-                <?php for($i=1; $i<6; $i++): ?>
-                    <i class="fa fa-star-o fa-star" aria-hidden="true" data-rate="<?=$i?>"></i>
-                <?php endfor; ?>
-            </div>
+            <?php if(!$article->isRated()): ?>
+                <div class="rating" data-article="<?=$article->getId()?>">
+                    <?php for($i=1; $i<6; $i++): ?>
+                        <i class="fa fa-star-o fa-star" aria-hidden="true" title="<?=$i?>" data-rate="<?=$i?>"></i>
+                    <?php endfor; ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     <?php endforeach; ?>

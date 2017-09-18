@@ -9,6 +9,9 @@
 namespace Bravo\Dto;
 
 
+use Bravo\Dao\Rate;
+use Bravo\Lib\Arbeiter;
+use Bravo\Lib\Cookie;
 use Bravo\Lib\Dto;
 use Bravo\Lib\Tool\Stringer;
 
@@ -194,5 +197,23 @@ class Article extends Dto
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRating()
+    {
+        if(!isset($this->rating)){
+            /** @var Rate $rateDao */
+            $rateDao = Rate::getInstance();
+            $this->rating = $rateDao->getAvgByArticle($this);
+        }
+        return $this->rating;
+    }
 
+    /**
+     * @return bool
+     */
+    public function isRated(){
+        return in_array($this->id, Cookie::getRatedArticles());
+    }
 }

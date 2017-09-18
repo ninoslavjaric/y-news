@@ -18,6 +18,10 @@ class Response
      */
     protected $contentType = "text/html";
     /**
+     * @var integer
+     */
+    protected $statusCode;
+    /**
      * @var array
      */
     protected $content;
@@ -30,10 +34,13 @@ class Response
      * Response constructor.
      * @param array $content
      * @param string $view
+     * @param int $statusCode
      */
-    public function __construct(array $content, string $view = "index/index")
+    public function __construct(array $content, string $view = "index/index", int $statusCode = 200)
     {
         header("Content-type: {$this->contentType}");
+        http_response_code($statusCode);
+        $this->statusCode = $statusCode;
         $this->content = $content;
         $this->view = $view;
     }

@@ -15,6 +15,6 @@ use Bravo\Lib\Http\Response;
 class ErrorController extends Controller
 {
     public function getIndex($e):Response{
-        return new Response(['title'=>"Exception occurred", 'error'=>$e], "error/index");
+        return new Response(['title'=>"Exception occurred", 'error'=>$e], "error/index", 404);
     }
 }

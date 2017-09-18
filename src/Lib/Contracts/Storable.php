@@ -54,6 +54,12 @@ interface Storable
     public function count();
 
     /**
+     * @param string $column
+     * @return float
+     */
+    public function avg(string $column);
+
+    /**
      * @param Dto $object
      * @return $object
      */

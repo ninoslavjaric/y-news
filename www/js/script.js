@@ -46,6 +46,14 @@ $(function(){
         $(this).removeClass("fa-star-o");
         $(this).nextAll().addClass("fa-star-o");
     }).click(function (event) {
-        console.log(event);
+        $.post("/news/rate/"+$(this).parents(".rating").first().data("article"),
+            {
+                rate    :   $(this).data("rate")
+            },
+            function (response) {
+                if(response.ok){
+                    $("[data-article="+response.article+"]").hide();
+                }
+            });
     });
 });

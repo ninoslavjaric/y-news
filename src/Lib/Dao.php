@@ -83,14 +83,9 @@ abstract class Dao
      * @throws \Exception
      */
     public function getById(int $id): Dto{
-//        $class = get_class($this);
-//        $result = self::getAdapter()
-//            ->select($this)
-//            ->where("id = ?", [$id])
-//            ->get($class::$dtoType)
-//        ;
-//        if($result)
-//            return current($result);
+        /** @var Dto $dto */
+        if($dto = Cache::get("{$this->getDtoType()}:id:{$id}"))
+            return $dto;
         if($dto = $this->getOneBy("id", $id))
             return $dto;
         throw new \Exception("No Dto with id = {$id}");
@@ -135,6 +130,23 @@ abstract class Dao
         ;
         return $storable->count();
     }
+
+    /**
+     * @param string $column
+     * @param $value
+     * @param bool $like
+     * @param string $field
+     * @return float
+     */
+    public function getAvgBy(string $column, $value, bool $like = false, string $field = "id"): float {
+        $comparator = $like ? "LIKE" : "=";
+        $value = $like ? "%{$value}%" : $value;
+        $storable = self::getAdapter()
+            ->select($this)
+            ->where("`{$column}` {$comparator} ?", [$value])
+        ;
+        return $storable->avg($field);
+    }
     /**
      * @param string $column
      * @param $value
@@ -149,6 +161,9 @@ abstract class Dao
 
     public function persist(Dto &$object){
         self::getAdapter()->insertOrUpdate($object);
+        Arbeiter::getInstance()
+            ->getEventContainer()
+            ->trigger("dtoReset", $object);
     }
 
     /**

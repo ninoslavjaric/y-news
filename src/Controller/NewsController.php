@@ -11,7 +11,9 @@ namespace Bravo\Controller;
 
 use Bravo\Dao\Article;
 use Bravo\Dao\Category;
+use Bravo\Dao\Rate;
 use Bravo\Lib\Controller;
+use Bravo\Lib\Cookie;
 use Bravo\Lib\Http\JsonResponse;
 use Bravo\Lib\Http\Response;
 
@@ -72,10 +74,29 @@ class NewsController extends Controller
         ]);
     }
 
-    public function putIndex(){
+    public function postRate($id){
+        try{
+            if(in_array($id, Cookie::getRatedArticles()))
+                throw new \Exception("Already rated.");
+            /** @var \Bravo\Dto\Article $article */
+            $article = Article::getInstance()->getById($id);
+            $rate = (new \Bravo\Dto\Rate())
+                ->setValue($this->getParam('rate'))
+                ->setCreatedAt(new \DateTime())
+                ->setArticle($article)
+            ;
+            Rate::getInstance()->persist($rate);
 
-        return new JsonResponse([
-            "test"  =>  "its ok",
-        ]);
+            Cookie::addRatedArticle($article->getId());
+            return new JsonResponse([
+                'ok'        =>  true,
+                'article'   =>  $article->getId(),
+            ]);
+        }catch (\Exception $exception){
+            return new JsonResponse([
+                'ok'        =>  false,
+                "message"   =>  $exception->getMessage(),
+            ], 404);
+        }
     }
 }

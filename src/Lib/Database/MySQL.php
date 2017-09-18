@@ -133,7 +133,7 @@ class MySQL extends \mysqli implements Storable
             if (!$stmt->execute())
                 throw new \Exception("Execute failed: ({$stmt->errno}) {$stmt->error}");
             $result = $stmt->get_result();
-            /** @var Dto $dtos */
+            /** @var Dto[] $dtos */
             $dtos = [];
             while ($id = $result->fetch_object()){
                 $dtoKey = "{$this->dao->getDtoType()}:id:{$id->id}";
@@ -200,9 +200,6 @@ class MySQL extends \mysqli implements Storable
         }
         if($id = $this->execute($this->query, $types, $values))
             $object->setId($id);
-        Arbeiter::getInstance()
-            ->getEventContainer()
-            ->trigger("dtoReset", $object);
         return $object;
     }
 
@@ -323,6 +320,36 @@ class MySQL extends \mysqli implements Storable
             $stmt->close();
 
             return $counter->count;
+        }
+        throw new \Exception($this->error);
+    }
+
+    /**
+     * @param string $column
+     * @return float
+     * @throws \Exception
+     */
+    public function avg(string $column)
+    {
+        $this->query = str_replace("{coulumns}", "avg({$column}) as `avg`", $this->query);
+        if ($stmt = $this->prepare($this->query)) {
+            $params = isset($this->cParams) ? $this->cParams : [];
+            if($params){
+                $types = "";
+                foreach ($params as $key => &$param)
+                $this->typeGenerator($types, $param);
+                $bindParams = array_merge([$types], $params);
+                if (!call_user_func_array([$stmt, "bind_param"], $bindParams))
+                throw new \Exception("Binding parameters failed: ({$stmt->errno}) {$stmt->error}");
+            }
+            if (!$stmt->execute())
+            throw new \Exception("Execute failed: ({$stmt->errno}) {$stmt->error}");
+            $result = $stmt->get_result();
+            /** @var Dto $dtos */
+            $counter = $result->fetch_object();
+            $stmt->close();
+
+            return $counter->avg;
         }
         throw new \Exception($this->error);
     }

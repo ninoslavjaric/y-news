@@ -15,14 +15,17 @@ class Rate extends Dto
 {
     /**
      * @var Article
+     * @column article_id
      */
     private $article;
     /**
      * @var string
+     * @column rate
      */
     private $value;
     /**
      * @var \DateTime
+     * @column created_at
      */
     private $createdAt;
 

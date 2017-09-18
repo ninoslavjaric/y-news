@@ -11,6 +11,7 @@ namespace Bravo\Controller;
 
 use Bravo\Dao\Article;
 use Bravo\Lib\Controller;
+use Bravo\Lib\Cookie;
 use Bravo\Lib\Http\Response;
 
 class IndexController extends Controller

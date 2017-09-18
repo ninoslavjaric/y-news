@@ -12,9 +12,12 @@ namespace Bravo\Lib\Http;
 class JsonResponse extends Response
 {
     protected $contentType = "application/json";
-    public function __construct(array $content)
+    protected $statusCode;
+    public function __construct(array $content, int $statusCode = 200)
     {
-        parent::__construct($content, "index/index");
+        parent::__construct($content);
+        $this->statusCode = $statusCode;
+        http_response_code($statusCode);
     }
 
     public function __toString()
