@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h3>
-                            <a href="<?= $article->getLink() ?>">
+                            <a class="bravo-title-link" href="<?= $article->getLink() ?>">
                                 <?=$article->getTitle()?>
                             </a>
                         </h3>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <a href="<?= $article->getLink() ?>">
+                        <a class="bravo-image-link" href="<?= $article->getLink() ?>">
                             <img src="<?= $article->getImage() ?>" alt="<?=$article->getTitle()?>" class="img-responsive">
                         </a>
                     </div>

@@ -45,7 +45,7 @@ var tooltipCallback = function (response) {
         ).appendTo(tooltip);
     }
     tooltip.appendTo($("body"));
-}
+};
 
 $(function(){
     $(window).scroll(function (e) {
@@ -89,5 +89,12 @@ $(function(){
                     $(".rate[data-article="+response.article+"]").css("width", (100*response.rating/5)+"%")
                 }
             });
+    });
+
+    $("a.bravo-image-link").click(function(event){
+        ga('send', 'event', "Site departure", "Image click", $(this).attr("href"));
+    });
+    $("a.bravo-title-link").click(function(event){
+        ga('send', 'event', "Site departure", "Title click", $(this).attr("href"));
     });
 });

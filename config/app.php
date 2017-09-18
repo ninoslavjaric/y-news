@@ -28,5 +28,5 @@ return [
         ],
     ],
     'fbAppId'   =>  "136678420285291",
-    'google-analytics'  =>  "",
+    'google-analytics'  =>  "UA-68703861-6",
 ];
