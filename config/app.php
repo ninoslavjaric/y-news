@@ -29,4 +29,5 @@ return [
     ],
     'fbAppId'   =>  "136678420285291",
     'google-analytics'  =>  "UA-68703861-6",
+    'contact-email'     =>  "ninoslavjaric@gmail.com",
 ];

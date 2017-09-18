@@ -12,16 +12,24 @@ namespace Bravo\Controller;
 use Bravo\Lib\Controller;
 use Bravo\Lib\Http\JsonResponse;
 use Bravo\Lib\Http\Response;
+use Bravo\Lib\Session;
 
 class ContactController extends Controller
 {
+    use Validator;
     public function getIndex(){
         return new Response(['title'=>"Contact"], "contact/index");
     }
     public function postIndex(){
-        return new JsonResponse([
-            'params'    =>  $this->getRequest()->getParams(),
-            'req'       =>  $_SERVER,
+        if("/contact" != str_replace($this->request->getOrigin(), "", $this->request->getReferer()))
+            throw new \Exception("Wrong referer");
+        $this->validate($this->request->getParams(), [
+            'email' =>  "email",
+            'first-name'    =>  "max:15|min:3",
+            'last-name'     =>  "max:15|min:3",
+            'subject'       =>  "max:15|min:5",
+            'body'          =>  "min:15|max:1000",
         ]);
+        return $this->redirect("/contact");
     }
 }

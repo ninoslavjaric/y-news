@@ -40,11 +40,24 @@ class Request
      * @var string
      */
     private $referer;
+    /**
+     * @var string
+     */
+    private $origin;
 
     /**
      * @return string
      */
-    public function getHost(): string
+    public function getOrigin()
+    {
+        if(isset($_SERVER['HTTP_ORIGIN']))
+            $this->origin = $_SERVER['HTTP_ORIGIN'];
+        return $this->origin;
+    }
+    /**
+     * @return string
+     */
+    public function getHost()
     {
         if(isset($_SERVER['HTTP_HOST']))
             $this->host = $_SERVER['HTTP_HOST'];
@@ -54,7 +67,7 @@ class Request
     /**
      * @return string
      */
-    public function getReferer(): string
+    public function getReferer()
     {
         if(isset($_SERVER['HTTP_REFERER']))
             $this->referer = $_SERVER['HTTP_REFERER'];

@@ -80,6 +80,7 @@ class Controller
 
     public function redirect($url = "/four-o-four"){
         header("Location: {$url}");
+        return new Response([]);
     }
 
     protected function getParam(string $key){

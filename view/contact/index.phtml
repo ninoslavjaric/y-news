@@ -5,34 +5,39 @@
             <div class="panel-body">
                 <h3>If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.</h3>
                 <form action="/contact" method="post">
+                    <?php foreach (\Bravo\Lib\Session::getFlashErrorMessages() as $errorMessage): ?>
+                        <div class="alert alert-danger">
+                            <strong>Danger!</strong> <?=$errorMessage?>
+                        </div>
+                    <?php endforeach; ?>
                     <div class="row">
-                        <label for="first-name" class="col-sm-2 control-label">First name</label>
+                        <label for="first-name" class="col-sm-2 control-label">First name*</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="first-name" name="first-name" type="text" placeholder="ex. Ninoslav">
+                            <input required class="form-control" id="first-name" name="first-name" type="text" placeholder="ex. Ninoslav">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="last-name" class="col-sm-2 control-label">Last name</label>
+                        <label for="last-name" class="col-sm-2 control-label">Last name*</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="last-name" name="last-name" type="text" placeholder="ex. Jaric">
+                            <input required class="form-control" id="last-name" name="last-name" type="text" placeholder="ex. Jaric">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="email" class="col-sm-2 control-label">Email</label>
+                        <label for="email" class="col-sm-2 control-label">Email*</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="email" name="email" type="email" placeholder="ex. ninoslav@jaric.online">
+                            <input required class="form-control" id="email" name="email" type="email" placeholder="ex. ninoslav@jaric.online">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="subject" class="col-sm-2 control-label">Subject</label>
+                        <label for="subject" class="col-sm-2 control-label">Subject*</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="subject" name="subject" type="text" placeholder="ex. Question about nothing">
+                            <input required class="form-control" id="subject" name="subject" type="text" placeholder="ex. Question about nothing">
                         </div>
                     </div>
                     <div class="row">
-                        <label for="body" class="col-sm-2 control-label">Body</label>
+                        <label for="body" class="col-sm-2 control-label">Body*</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="5" id="body" name="body" placeholder="***" style="max-width: 100%;"></textarea>
+                            <textarea required class="form-control" rows="5" id="body" name="body" placeholder="***" style="max-width: 100%;"></textarea>
                         </div>
                     </div>
                     <div class="row">
