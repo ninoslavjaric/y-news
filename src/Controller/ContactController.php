@@ -15,6 +15,7 @@ use Bravo\Lib\Http\JsonResponse;
 use Bravo\Lib\Http\Response;
 use Bravo\Lib\Mailer;
 use Bravo\Lib\Session;
+use Bravo\Lib\Tool\Captcha;
 
 class ContactController extends Controller
 {
@@ -25,14 +26,17 @@ class ContactController extends Controller
     public function postIndex(){
         if("/contact" != str_replace($this->request->getOrigin(), "", $this->request->getReferer()))
             throw new \Exception("Wrong referer");
-
-        if(!$this->validate($this->request->getParams(), [
-            'email' =>  "email",
-            'first-name'    =>  "max:15|min:3",
-            'last-name'     =>  "max:15|min:3",
-            'subject'       =>  "max:55|min:5",
-            'body'          =>  "min:15|max:1000",
-        ]))
+        $paramsValid = $this->validate(
+            $this->request->getParams(),
+            [
+                'email' =>  "email",
+                'first-name'    =>  "max:15|min:3",
+                'last-name'     =>  "max:15|min:3",
+                'subject'       =>  "max:55|min:5",
+                'body'          =>  "min:15|max:1000",
+            ]);
+        $isHuman = Captcha::getInstance()->check($this->getParam("g-recaptcha-response"));
+        if(!$paramsValid || !$isHuman)
             return $this->redirect("/contact");
 
         $mailer = new Mailer(

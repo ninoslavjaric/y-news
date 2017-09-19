@@ -15,9 +15,14 @@ class Session
         if (session_status() == PHP_SESSION_NONE)
             session_start();
     }
+
+    public static function addFlashErrorMessages(string $messages){
+        self::init();
+        $_SESSION['flash_error_messages'][] = $messages;
+    }
     public static function setFlashErrorMessages(array $messages){
         self::init();
-        $_SESSION['flash_messages'] = $messages;
+        $_SESSION['flash_error_messages'] = $messages;
     }
 
     public static function setFlashReportMessages(array $messages)

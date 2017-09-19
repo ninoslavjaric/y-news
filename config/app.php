@@ -27,6 +27,10 @@ return [
             ['title' =>  "Contact", 'href' =>  "/contact"],
         ],
     ],
+    'reCaptcha' =>  [
+        'secret'    =>  "6Lf7TDEUAAAAALndlv7DklZq7b_QyjR4yHtMwoSv",
+        'key'       =>  "6Lf7TDEUAAAAAK9abxV4Pyi4Mfu-f6FmnYkYFD-e",
+    ],
     'fbAppId'   =>  "136678420285291",
     'google-analytics'  =>  "UA-68703861-6",
     'contact-email'     =>  "jaricninoslav@gmail.com",
