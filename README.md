@@ -9,7 +9,7 @@
 CREATE DATABASE `bravo` CHARSET=utf8 COLLATE=utf8_general_ci;
 ```
 #### Postavke tabela ####
-Inicijalizacija aplikacije radi izvrsavanjem narednih komandi
+Inicijalizacija aplikacije se radi izvrsavanjem narednih komandi
 
 ```bash
 /usr/bin/php /pathToProject/console/runner setup
