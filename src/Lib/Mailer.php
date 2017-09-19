@@ -34,6 +34,7 @@ class Mailer
         $this->subject = $subject;
         $this->message = $message;
         $this->from = $from;
+        $this->additional_headers["From"] = "From: <{$from}>";
     }
 
 
@@ -101,11 +102,13 @@ class Mailer
 
     /**
      * @param mixed $from
+     * @param string $firstName
+     * @param string $lastName
      * @return Mailer
      */
-    public function setFrom($from)
+    public function setFrom($from, $firstName = "", $lastName = "")
     {
-        $this->additional_headers[] = "From: {$from}";
+        $this->additional_headers["From"] = "From: {$firstName} {$lastName} <{$from}>";
         return $this;
     }
 

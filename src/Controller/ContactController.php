@@ -40,6 +40,7 @@ class ContactController extends Controller
             $this->getParam("subject"),
             $this->getParam("body")
         );
+        $mailer->setFrom($this->getParam("email"), $this->getParam("first-name"), $this->getParam("last-name"));
         $mailer->send();
         return $this->redirect("/contact");
     }
