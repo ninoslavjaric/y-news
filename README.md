@@ -5,7 +5,7 @@
 ### Postavka ###
 #### Kreiranje baze ####
 ```mysql
-CREATE DATABASE `bravo` CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE `bravo` CHARSET=utf8 COLLATE=utf8_general_ci;
 ```
 #### Postavke tabela ####
 ```bash
