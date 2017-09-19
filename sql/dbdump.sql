@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `articles`
 --
-
+DROP TABLE IF EXISTS `articles`;
 CREATE TABLE `articles` (
   `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -43,6 +43,7 @@ CREATE TABLE `articles` (
 -- Table structure for table `categories`
 --
 
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `key` varchar(45) NOT NULL,
@@ -66,6 +67,7 @@ INSERT INTO `categories` (`id`, `key`, `title`) VALUES
 -- Table structure for table `rates`
 --
 
+DROP TABLE IF EXISTS `rates`;
 CREATE TABLE `rates` (
   `id` int(11) NOT NULL,
   `rate` int(11) NOT NULL,

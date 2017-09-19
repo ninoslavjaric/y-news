@@ -34,8 +34,13 @@
                         </a>
                     </div>
                     <div class="col-sm-6">
-                        <div class="rate-wrapper">
-                            <div class="rate" data-article="<?=$article->getId()?>" style="width: <?=100*$article->getRating()/5?>%;"></div>
+                        <div class="rate-container">
+                            <div class="rate-wrapper">
+                                <div class="rate" data-article="<?=$article->getId()?>" style="width: <?=100*$article->getRating()/5?>%;"></div>
+                            </div>
+                            <?php if($article->isRated()): ?>
+                                <i class="fa fa-check-circle fa-check-rated" aria-hidden="true"></i>
+                            <?php endif; ?>
                         </div>
                         <p>
                             <?=$article->getTextDescription()?>

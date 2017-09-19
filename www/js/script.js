@@ -28,7 +28,6 @@ $.fn.handleTooltipTerminator = function(){
     });
 };
 var tooltipCallback = function (response) {
-    console.log(response);
     $(".bravo-tooltip").remove();
     var tooltip = $("<div></div>")
         .attr("class","bravo-tooltip")
@@ -86,7 +85,11 @@ $(function(){
                 if(response.ok){
                     alert(response.message);
                     $(".rating[data-article="+response.article+"]").hide();
-                    $(".rate[data-article="+response.article+"]").css("width", (100*response.rating/5)+"%")
+                    $(".rate[data-article="+response.article+"]")
+                        .css("width", (100*response.rating/5)+"%")
+                        .parent()
+                        .after($("<i class=\"fa fa-check-circle fa-check-rated\" aria-hidden=\"true\"></i>"))
+                    ;
                 }
             });
     });

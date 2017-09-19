@@ -14,12 +14,13 @@ class Cookie
     public static function addRatedArticle(int $id){
         $ratedOnes = self::getRatedArticles();
         $ratedOnes[] = $id;
-        setcookie('rated_articles', json_encode(array_unique($ratedOnes)), time() + (10 * 365 * 24 * 60 * 60), "/");
+        $ratedOnes = serialize(array_unique($ratedOnes));
+        setcookie('rated_articles', $ratedOnes, time() + (10 * 365 * 24 * 60 * 60), "/");
     }
 
     public static function getRatedArticles(){
         if($ratedOnes = static::get('rated_articles'))
-            return json_decode($ratedOnes);
+            return unserialize($ratedOnes);
         return [];
     }
 

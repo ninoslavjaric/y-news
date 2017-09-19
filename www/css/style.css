@@ -379,3 +379,11 @@ ul.pagination {
     animation: initial;
     -webkit-animation: initial;
 }
+.rate-container>* {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+i.fa.fa-check-circle.fa-check-rated {
+    color: green;
+}
