@@ -100,3 +100,24 @@ server {
 	CustomLog /pathToProject/logs/apache_access.log combined
 </VirtualHost>
 ```
+
+#### Google analytics i Facebook app ####
+###### config/app.php
+Kljucevi koji bi mogli biti zanimljivi za izmjene su:
+
+- debug
+- fbAppId   
+- google-analytics
+- contact-email
+
+```php
+return [
+    'debug' =>  true,
+    // **
+       * Something else
+       * /
+    'fbAppId'   =>  "136678420285291",
+    'google-analytics'  =>  "UA-68703861-6",
+    'contact-email'     =>  "ninoslavjaric@gmail.com",
+];
+```
