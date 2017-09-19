@@ -20,12 +20,26 @@ class Session
         $_SESSION['flash_messages'] = $messages;
     }
 
+    public static function setFlashReportMessages(array $messages)
+    {
+        self::init();
+        $_SESSION['flash_report_messages'] = $messages;
+    }
+
+    public static function getFlashReportMessages(){
+        return self::getFlashMessages('flash_report_messages');
+    }
+
     public static function getFlashErrorMessages(){
+        return self::getFlashMessages('flash_error_messages');
+    }
+
+    public static function getFlashMessages($key){
         self::init();
         $flashMessages = [];
-        if(isset($_SESSION['flash_messages']))
-            $flashMessages = $_SESSION['flash_messages'];
-        unset($_SESSION['flash_messages']);
+        if(isset($_SESSION[$key]))
+            $flashMessages = $_SESSION[$key];
+        unset($_SESSION[$key]);
         return $flashMessages;
     }
 }

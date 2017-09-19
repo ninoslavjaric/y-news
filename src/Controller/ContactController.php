@@ -25,7 +25,8 @@ class ContactController extends Controller
     public function postIndex(){
         if("/contact" != str_replace($this->request->getOrigin(), "", $this->request->getReferer()))
             throw new \Exception("Wrong referer");
-        if($this->validate($this->request->getParams(), [
+
+        if(!$this->validate($this->request->getParams(), [
             'email' =>  "email",
             'first-name'    =>  "max:15|min:3",
             'last-name'     =>  "max:15|min:3",
@@ -40,8 +41,10 @@ class ContactController extends Controller
             $this->getParam("subject"),
             $this->getParam("body")
         );
+
         $mailer->setFrom($this->getParam("email"), $this->getParam("first-name"), $this->getParam("last-name"));
-        $mailer->send();
+        if($sucess = $mailer->send())
+            Session::setFlashReportMessages(["Message is successfully sent"]);
         return $this->redirect("/contact");
     }
 }

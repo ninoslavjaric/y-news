@@ -133,7 +133,6 @@ class Mailer
 
 
     public function send(){
-        var_dump($this);die;
         return mail($this->to, $this->subject, $this->message, implode("\r\n", $this->additional_headers));
     }
 }

@@ -5,6 +5,11 @@
             <div class="panel-body">
                 <h3>If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.</h3>
                 <form action="/contact" method="post">
+                    <?php foreach (\Bravo\Lib\Session::getFlashReportMessages() as $reportMessage): ?>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> <?=$reportMessage?>
+                        </div>
+                    <?php endforeach; ?>
                     <?php foreach (\Bravo\Lib\Session::getFlashErrorMessages() as $errorMessage): ?>
                         <div class="alert alert-danger">
                             <strong>Danger!</strong> <?=$errorMessage?>
