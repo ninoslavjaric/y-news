@@ -2,26 +2,56 @@
 
 * [Ninoslav Jaric](http://www.jaric.online/)
 
-### Kako osvjezavati bazu? ###
+### Postavka ###
+#### Kreiranje baze ####
+```mysql
+CREATE DATABASE `bravo` CHARSET utf8 COLLATE utf8_general_ci;
+```
+#### Postavke tabela ####
+```bash
+/usr/bin/php /pathToProject/console/runner setup
+```
+#### Inicijalni load vijesti ####
+```bash
+/usr/bin/php /pathToProject/console/runner bravo-news -c science
+/usr/bin/php /pathToProject/console/runner bravo-news -c tech
+/usr/bin/php /pathToProject/console/runner bravo-news -c world
+/usr/bin/php /pathToProject/console/runner bravo-news -c politics
+/usr/bin/php /pathToProject/console/runner bravo-news -c health
+```
 
-Crob job pokrece periodicno skriptu koja osvjezava bazu iz feed-a.
+### Osvjezavanje baze ###
+
+Crob job pokrece dva puta dnevno skriptu koja osvjezava bazu iz feed-a.
 
 ```bash
-*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c science
-*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c tech
-*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c world
-*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c politics
-*/15 * * * * /usr/bin/php /pathToProject/console/runner bravo-news -c health
+0 */12 * * * /usr/bin/php /pathToProject/console/runner bravo-news -c science
+0 */12 * * * /usr/bin/php /pathToProject/console/runner bravo-news -c tech
+0 */12 * * * /usr/bin/php /pathToProject/console/runner bravo-news -c world
+0 */12 * * * /usr/bin/php /pathToProject/console/runner bravo-news -c politics
+0 */12 * * * /usr/bin/php /pathToProject/console/runner bravo-news -c health
 
 ```
 
-### MySQL Baza ###
+### Postojece postavke MySQL Baze ###
 
-> username: bravo
->
-> password: bravo
->
-> database: bravo
+###### config/database.php
+```php
+return [
+    "mysql" => [
+        "host"    => "127.0.0.1",
+        "username"=> "bravo",
+        "password"=> "bravo",
+        "dbname"  => "bravo",
+        "port"    => "3306"
+    ],
+    "redis" => [
+        "host"  => "127.0.0.1",
+        "port"  => "6379",
+        "dbname"    =>  "1"
+    ]
+]
+```
 
 ### Nginx konfiguracija ###
 ```nginx
@@ -45,6 +75,7 @@ server {
 }
 ```
 ### Apache konfiguracija ###
+###### Module enabled: proxy_fcgi, rewrite
 ```apache
 <VirtualHost *:80>
 	ServerName bravo.yf 
@@ -69,8 +100,3 @@ server {
 	CustomLog /pathToProject/logs/apache_access.log combined
 </VirtualHost>
 ```
-
-# TODO #
-- Pagination
-- Mailing
-- Rating
