@@ -9,6 +9,8 @@
 CREATE DATABASE `bravo` CHARSET=utf8 COLLATE=utf8_general_ci;
 ```
 #### Postavke tabela ####
+Inicijalizacija aplikacije radi izvrsavanjem narednih komandi
+
 ```bash
 /usr/bin/php /pathToProject/console/runner setup
 ```
@@ -21,7 +23,7 @@ CREATE DATABASE `bravo` CHARSET=utf8 COLLATE=utf8_general_ci;
 /usr/bin/php /pathToProject/console/runner bravo-news -c health
 ```
 
-### Osvjezavanje baze ###
+### Osvjezavanje podataka ###
 
 Crob job pokrece dva puta dnevno skriptu koja osvjezava bazu iz feed-a.
 
