@@ -30,7 +30,7 @@ class ContactController extends Controller
             'email' =>  "email",
             'first-name'    =>  "max:15|min:3",
             'last-name'     =>  "max:15|min:3",
-            'subject'       =>  "max:15|min:5",
+            'subject'       =>  "max:55|min:5",
             'body'          =>  "min:15|max:1000",
         ]))
             return $this->redirect("/contact");
