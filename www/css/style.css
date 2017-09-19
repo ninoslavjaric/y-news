@@ -375,3 +375,7 @@ ul.pagination {
     -o-transition: color .2s, background-color .2s, opacity .2s;
     transition: color .2s, background-color .2s, opacity .2s;
 }
+.article-card:hover .rating {
+    animation: initial;
+    -webkit-animation: initial;
+}
