@@ -130,6 +130,6 @@ class Mailer
 
 
     public function send(){
-        return mail($this->to, $this->subject, $this->message, $this->additional_headers);
+        return mail($this->to, $this->subject, $this->message, implode("\r\n", $this->additional_headers));
     }
 }
