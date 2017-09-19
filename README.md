@@ -75,7 +75,7 @@ server {
 }
 ```
 ### Apache konfiguracija ###
-###### Module enabled: proxy_fcgi, rewrite
+###### Modules enabled: proxy_fcgi, rewrite
 ```apache
 <VirtualHost *:80>
 	ServerName bravo.yf 
