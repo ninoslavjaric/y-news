@@ -100,4 +100,19 @@ class View
     public function getUrl(){
         return $this->getRequest()->getPath();
     }
+
+    public function getPath()
+    {
+        return $this->getRequest()->getPath();
+    }
+
+    public function getHost()
+    {
+        return $this->getRequest()->getHost();
+    }
+
+    public function getOrigin()
+    {
+        return $this->getRequest()->getOrigin();
+    }
 }

@@ -1,5 +1,12 @@
 <html lang="en">
 <head>
+    <meta property="og:url"                content="<?="{$this->getOrigin()}{$this->getPath()}"?>" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="<?=isset($this->title) ? $this->title : "Y-portal"?>" />
+    <meta property="og:description"        content="<?=isset($this->title) ? $this->title : "Y-portal"?>" />
+    <meta property="og:image"              content="<?=$this->getOrigin()?>/img/fb.jpg" />
+    <meta property="fb:app_id"             content="<?=\Bravo\Lib\Config::get("app.fbAppId")?>" />
+
     <title><?=isset($this->title) ? $this->title : "Yahoo-portal"?></title>
     <meta charset="utf-8">
     <script src='https://www.google.com/recaptcha/api.js'></script>

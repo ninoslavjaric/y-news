@@ -50,8 +50,8 @@ class Request
      */
     public function getOrigin()
     {
-        if(isset($_SERVER['HTTP_ORIGIN']))
-            $this->origin = $_SERVER['HTTP_ORIGIN'];
+        if(isset($_SERVER['REQUEST_SCHEME']))
+            $this->origin = "{$_SERVER['REQUEST_SCHEME']}://{$this->getHost()}";
         return $this->origin;
     }
     /**
