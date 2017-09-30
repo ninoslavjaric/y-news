@@ -120,6 +120,7 @@ class MySQL extends \mysqli implements Storable
     public function get()
     {
         $this->query = str_replace("{coulumns}", "`id`", $this->query);
+
         if ($stmt = $this->prepare($this->query)) {
             $params = isset($this->cParams) ? $this->cParams : [];
             if($params){

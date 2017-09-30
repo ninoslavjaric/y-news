@@ -92,20 +92,51 @@ abstract class Dao
     }
 
     /**
-     * @param string $column
+     * @param mixed $column
+     * @param $value
+     * @param bool $like
+     * @return Storable
+     * @throws \Exception
+     */
+    private function prepareCondition($column, $value, bool $like = false){
+        if(!is_string($column) && !is_array($column))
+            throw new \Exception("Column does not meet type constraints. It aught being string or array.");
+        $condition = "";
+        $values = [];
+        if($like){
+            if(is_array($column))
+                $column = implode("`, `", $column);
+            $values[] = preg_replace_callback('/([^\s]+)/', function ($m){
+                return "+{$m[1]}";
+            }, $value);
+            $condition = "MATCH(`{$column}`) AGAINST(? IN BOOLEAN MODE)";
+        } else {
+            if(!is_array($column))
+                $column = [$column];
+            foreach ($column as $item){
+                $condition .= ($condition?" AND ":"")."`{$item}` = ?";
+                $values[] = $value;
+            }
+        }
+
+        return self::getAdapter()
+            ->select($this)
+            ->where($condition, $values)
+        ;
+    }
+
+    /**
+     * @param string|string[] $column
      * @param $value
      * @param bool $like
      * @param string|null $orderKey
      * @param bool $direction
+     * @param null $limit
+     * @param int $offset
      * @return array
      */
-    public function getBy(string $column, $value, bool $like = false, $orderKey = null, $direction = true, $limit = null, $offset = 0): array {
-        $comparator = $like ? "LIKE" : "=";
-        $value = $like ? "%{$value}%" : $value;
-        $storable = self::getAdapter()
-            ->select($this)
-            ->where("`{$column}` {$comparator} ?", [$value])
-        ;
+    public function getBy($column, $value, bool $like = false, $orderKey = null, $direction = true, $limit = null, $offset = 0): array {
+        $storable = $this->prepareCondition($column, $value, $like);
         if($orderKey)
             $storable = $storable->orderBy($orderKey, $direction);
         if($limit)
@@ -122,12 +153,7 @@ abstract class Dao
      * @internal param bool $direction
      */
     public function getCountBy(string $column, $value, bool $like = false): int {
-        $comparator = $like ? "LIKE" : "=";
-        $value = $like ? "%{$value}%" : $value;
-        $storable = self::getAdapter()
-            ->select($this)
-            ->where("`{$column}` {$comparator} ?", [$value])
-        ;
+        $storable = $this->prepareCondition($column, $value, $like);
         return $storable->count();
     }
 
@@ -139,12 +165,7 @@ abstract class Dao
      * @return float
      */
     public function getAvgBy(string $column, $value, bool $like = false, string $field = "id"): float {
-        $comparator = $like ? "LIKE" : "=";
-        $value = $like ? "%{$value}%" : $value;
-        $storable = self::getAdapter()
-            ->select($this)
-            ->where("`{$column}` {$comparator} ?", [$value])
-        ;
+        $storable = $this->prepareCondition($column, $value, $like);
         if($avg = $storable->avg($field))
             return $avg;
         return 0;

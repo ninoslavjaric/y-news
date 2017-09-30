@@ -85,7 +85,10 @@ CREATE TABLE `rates` (
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `guid_UNIQUE` (`guid`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `category_id` (`category_id`),
+  ADD FULLTEXT(`title`),
+  ADD FULLTEXT(`description`),
+  ADD FULLTEXT(`description`, `title`);
 
 --
 -- Indexes for table `categories`
