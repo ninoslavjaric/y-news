@@ -11,6 +11,7 @@ pipelines:
         caches:
           - composer
         script:
+          - apt install ssh
           - ssh bravo@jaric.online
           - ls -l
           - pwd
