@@ -1,7 +1,7 @@
 # Yahoo portal #
 
 * [Ninoslav Jaric](http://www.jaric.online/)
-* [Yahoo portal](http://bravo.jaric.online:8080/)
+* [Yahoo portal](http://bravo.jaric.online/)
 
 ### Postavka ###
 #### Kreiranje baze ####
