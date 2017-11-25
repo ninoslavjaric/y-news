@@ -28,8 +28,8 @@ return [
         ],
     ],
     'reCaptcha' =>  [
-        'secret'    =>  "6Lf7TDEUAAAAALndlv7DklZq7b_QyjR4yHtMwoSv",
-        'key'       =>  "6Lf7TDEUAAAAAK9abxV4Pyi4Mfu-f6FmnYkYFD-e",
+        'secret'    =>  "6LdtZDoUAAAAAP50PaqwRXuD32CDaw18kZQxSTsn",
+        'key'       =>  "6LdtZDoUAAAAAAO2o4fAvSzWQquyyp0li8jAmUBL",
     ],
     'fbAppId'   =>  "136678420285291",
     'google-analytics'  =>  "UA-68703861-6",
