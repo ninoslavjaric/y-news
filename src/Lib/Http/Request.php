@@ -63,6 +63,15 @@ class Request
             $this->host = $_SERVER['HTTP_HOST'];
         return $this->host;
     }
+    /**
+     * @return string
+     */
+    public function getClientIp()
+    {
+        if(isset($_SERVER['REMOTE_ADDR']))
+            $this->host = $_SERVER['REMOTE_ADDR'];
+        return $this->host;
+    }
 
     /**
      * @return string
@@ -195,5 +204,11 @@ class Request
         if(isset($directive['arguments']))
             return new Container($instance, $directive['method'], $directive['arguments']);
         return new Container($instance, $directive['method']);
+    }
+
+    public function isAjax()
+    {
+        return (isset($this->getHeaders()['X-Requested-With']) &&
+            $this->getHeaders()['X-Requested-With'] === "XMLHttpRequest");
     }
 }

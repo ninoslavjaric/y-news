@@ -16,6 +16,11 @@ class Session
             session_start();
     }
 
+    public static function getSessionId(){
+        self::init();
+        return session_id();
+    }
+
     public static function addFlashErrorMessages(string $messages){
         self::init();
         $_SESSION['flash_error_messages'][] = $messages;
