@@ -1,20 +1,20 @@
 # Yahoo portal #
 
 * [Ninoslav Jaric](http://www.jaric.online/)
-* [Yahoo portal](http://bravo.jaric.online/)
+* [Yahoo portal](http://y-news.online/)
 
-### Postavka ###
-#### Kreiranje baze ####
+### Setup ###
+#### Db creation ####
 ```mysql
 CREATE DATABASE `bravo` CHARSET=utf8 COLLATE=utf8_general_ci;
 ```
-#### Postavke tabela ####
-Inicijalizacija aplikacije se radi izvrsavanjem narednih komandi
+#### Tables setup ####
+App initialization is being done by running following commands
 
 ```bash
 /usr/bin/php /pathToProject/console/runner setup
 ```
-#### Inicijalni load vijesti ####
+#### Initial load of news ####
 ```bash
 /usr/bin/php /pathToProject/console/runner bravo-news -c science
 /usr/bin/php /pathToProject/console/runner bravo-news -c tech
@@ -23,9 +23,9 @@ Inicijalizacija aplikacije se radi izvrsavanjem narednih komandi
 /usr/bin/php /pathToProject/console/runner bravo-news -c health
 ```
 
-### Osvjezavanje podataka ###
+### Data refresh ###
 
-Crob job pokrece dva puta dnevno skriptu koja osvjezava bazu iz feed-a.
+Crontab refreshes the data two times per day by executing script that pulls feed
 
 ```bash
 0 */12 * * * /usr/bin/php /pathToProject/console/runner bravo-news -c science
@@ -36,16 +36,16 @@ Crob job pokrece dva puta dnevno skriptu koja osvjezava bazu iz feed-a.
 
 ```
 
-### Postojece postavke MySQL Baze ###
+### Existing MySQL data config ###
 
 ###### config/database.php
 ```php
 return [
     "mysql" => [
         "host"    => "127.0.0.1",
-        "username"=> "bravo",
-        "password"=> "bravo",
-        "dbname"  => "bravo",
+        "username"=> "username",
+        "password"=> "pass",
+        "dbname"  => "database",
         "port"    => "3306"
     ],
     "redis" => [
@@ -56,10 +56,10 @@ return [
 ]
 ```
 
-### Nginx konfiguracija ###
+### Nginx config ###
 ```nginx
 server {
-	server_name bravo.yf bravo-test.com;
+	server_name y-news.online;
 	root /pathToProject/www;
 	location / {
 		try_files $uri /index.php$is_args$args;
@@ -77,12 +77,12 @@ server {
 	access_log /pathToProject/logs/access.log;
 }
 ```
-### Apache konfiguracija ###
+### Apache config ###
 ###### Modules enabled: proxy_fcgi, rewrite
 ```apache
 <VirtualHost *:80>
-	ServerName bravo.yf 
-	ServerAlias bravo-test.com
+	ServerName y-news.online 
+	ServerAlias www.y-news.online
 	
 	DocumentRoot /pathToProject/www
 	<Directory /pathToProject/www>
@@ -104,9 +104,9 @@ server {
 </VirtualHost>
 ```
 
-#### Google analytics i Facebook app ####
+#### Google analytics & Facebook app ####
 ###### config/app.php
-Kljucevi koji bi mogli biti zanimljivi za izmjene su:
+Keys interesting to change are:
 
 - debug
 - fbAppId   
@@ -121,11 +121,11 @@ return [
        * Something else
        * /
     'fbAppId'   =>  "136678420285291",
-    'google-analytics'  =>  "UA-68703861-6",
-    'contact-email'     =>  "jaricninoslav@gmail.com",
+    'google-analytics'  =>  "UA-XXXXXXXX-X",
+    'contact-email'     =>  "username@example.com",
     'reCaptcha' =>  [
-        'secret'    =>  "6Lf7TDEUAAAAALndlv7DklZq7b_QyjR4yHtMwoSv",
-        'key'       =>  "6Lf7TDEUAAAAAK9abxV4Pyi4Mfu-f6FmnYkYFD-e",
+        'secret'    =>  "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        'key'       =>  "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
     ],
 ];
 ```
